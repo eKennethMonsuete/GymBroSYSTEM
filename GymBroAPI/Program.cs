@@ -1,7 +1,7 @@
 using EvolveDb;
 using GymBroINFRA.Context;
 using GymBroINFRA.Repository;
-
+using GymBroSERVICE.MeasuresService;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -15,27 +15,24 @@ internal class Program
 
         // Add services to the container.
 
-       // builder.Services.AddScoped<IMeasuresService, MeasuresServiceImplementation>();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddControllers();
 
+        builder.Services.AddScoped<IMeasuresService, MeasuresService>();
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
+        var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
 
         builder.Services.AddDbContext<MySQLContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
-            options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 29)));
-
-            if (builder.Environment.IsDevelopment())
-            {
-                MigrateDatabase(connectionString);
-            }
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
 
-
-
-
-        builder.Services.AddControllers();
-
         var app = builder.Build();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         // Configure the HTTP request pipeline.
 
@@ -47,33 +44,6 @@ internal class Program
 
         app.Run();
 
-        void MigrateDatabase(string connectionString)
-        {
-            try
-            {
-                // Corrigido: instancia um objeto da classe MySqlConnection
-                using (var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString))
-                {
-                    // Abre a conexão
-                    evolveConnection.Open();
-
-                    // Instancia Evolve e define suas propriedades
-                    var evolve = new Evolve(evolveConnection, msg => Log.Information(msg))
-                    {
-                        Locations = new List<string>() { "db/migrations" },
-                        IsEraseDisabled = true,
-                    };
-
-                    // Executa a migração
-                    evolve.Migrate();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Database migration failed", ex);
-                throw;
-            }
-
-        }
+        
     }
 }

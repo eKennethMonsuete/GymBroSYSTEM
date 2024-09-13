@@ -7,8 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entity\Measures1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Entity\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
-	  <ProjectReference Include="W:\AARQUIVOS\projetoIntegrado2semetreGYMv2\back-end2\GymBroSYSTEM\GymBroDOMAIN\GymBroDOMAIN.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
   </ItemGroup>
 
 </Project>

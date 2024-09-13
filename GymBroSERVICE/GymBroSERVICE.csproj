@@ -6,11 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\GymBroAPPLICATION\GymBroAPPLICATION.csproj" />
-		<ProjectReference Include="..\GymBroDOMAIN\GymBroDOMAIN.csproj" />
-		<ProjectReference Include="..\GymBroINFRA\GymBroINFRA.csproj" />
-		
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GymBroINFRA\GymBroINFRA.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserService\" />
+  </ItemGroup>
 
 </Project>

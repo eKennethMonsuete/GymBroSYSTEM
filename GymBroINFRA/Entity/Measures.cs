@@ -1,15 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GymBroDOMAIN.Entity
+namespace GymBroINFRA.Entity
 {
     [Table("measures")]
     public class Measures
     {
         [Column("Id")]
-        public long Id { get; set; }
+        public long Id
+        {
+            get; set;
+        }
 
         [Column("weight")]
-        public double Weight { get; set; }
+        public double Weight
+        {
+            get; set;
+        }
 
         [Column("right_biceps")]
         public double RightBiceps
@@ -28,6 +34,14 @@ namespace GymBroDOMAIN.Entity
         {
             get; set;
         }
+
+        
+
+       
+
+
+
+
 
 
 

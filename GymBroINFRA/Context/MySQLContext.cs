@@ -1,4 +1,4 @@
-﻿using GymBroDOMAIN.Entity;
+﻿using GymBroINFRA.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymBroINFRA.Context
@@ -6,18 +6,12 @@ namespace GymBroINFRA.Context
     public class MySQLContext : DbContext
     {
 
-        public MySQLContext()
+        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options)
         {
         }
-        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
-
-        
-
-
-
-
+        public DbSet<Measures> Measures { get; set; }
+        //public DbSet<User> Users { get; set; }
 
     }
 }
