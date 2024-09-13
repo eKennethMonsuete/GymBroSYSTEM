@@ -1,4 +1,4 @@
-﻿namespace GymBroAPI.DTOs
+﻿namespace GymBroAPPLICATION.DTOs
 {
     public class MeasuresDTO
     {

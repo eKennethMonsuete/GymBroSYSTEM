@@ -1,12 +1,8 @@
-﻿using GymBroAPI.DTOs;
+﻿
+using GymBroAPPLICATION.DTOs;
 using GymBroDOMAIN.Entity;
 using GymBroINFRA.Repository;
 using GymBroSERVICE.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GymBroSERVICE.Implementation
 {

@@ -7,7 +7,10 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\GymBroAPI\GymBroAPI.csproj" />
+		<ProjectReference Include="..\GymBroAPPLICATION\GymBroAPPLICATION.csproj" />
+		<ProjectReference Include="..\GymBroDOMAIN\GymBroDOMAIN.csproj" />
+		<ProjectReference Include="..\GymBroINFRA\GymBroINFRA.csproj" />
+		
 	</ItemGroup>
 
 </Project>

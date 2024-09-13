@@ -1,5 +1,7 @@
 using EvolveDb;
 using GymBroINFRA.Context;
+using GymBroINFRA.Repository;
+
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -13,7 +15,9 @@ internal class Program
 
         // Add services to the container.
 
-       
+       // builder.Services.AddScoped<IMeasuresService, MeasuresServiceImplementation>();
+
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         builder.Services.AddDbContext<MySQLContext>(options =>
         {
