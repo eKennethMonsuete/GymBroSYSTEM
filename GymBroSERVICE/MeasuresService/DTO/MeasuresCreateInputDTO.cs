@@ -30,5 +30,21 @@ namespace GymBroSERVICE.MeasuresService.DTO
         {
             get; set;
         }
+        public double RightQuadriceps
+        {
+            get; set;
+        }
+        public double LeftQuadriceps
+        {
+            get; set;
+        }
+        public double RightCalf
+        {
+            get; set;
+        }
+        public double LeftCalf
+        {
+            get; set;
+        }
     }
 }

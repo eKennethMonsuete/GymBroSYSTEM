@@ -23,7 +23,15 @@ namespace GymBroINFRA.Repository
 
         public T FindByID(long id)
         {
-            throw new NotImplementedException();
+            var entity = dbSet.Find(id);
+
+            // Verifica se a entidade foi encontrada
+            if (entity == null)
+            {
+                throw new KeyNotFoundException($"Entity with ID {id} was not found.");
+            }
+
+            return entity;
         }
 
 
@@ -45,44 +53,41 @@ namespace GymBroINFRA.Repository
 
         public void Delete(long id)
         {
-           var result = dbSet.SingleOrDefault(p => p.Equals(id));
-            if (result != null)
+            var entity = dbSet.SingleOrDefault(e => EF.Property<long>(e, "Id") == id);
+
+            if (entity == null)
             {
-                try
-                {
-                    dbSet.Remove(result);
-                    _context.SaveChanges();
+                throw new KeyNotFoundException("A entidade com o ID fornecido não foi encontrada.");
+            }
 
-
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-
+            try
+            {
+                dbSet.Remove(entity);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                // Aqui você pode capturar e tratar outras exceções que possam ocorrer
+                throw new InvalidOperationException("Falha ao tentar deletar a entidade.", ex);
             }
 
         }
 
-        public bool Exists(long id)
-        {
-            throw new NotImplementedException();
-        }
+
 
 
 
         public T Update(T item)
         {
-            // Supondo que T tenha uma propriedade Id
+            // Assumindo que T tem uma propriedade Id do tipo long
             var keyProperty = typeof(T).GetProperty("Id");
             if (keyProperty == null)
             {
                 throw new InvalidOperationException("Entity does not have an 'Id' property.");
             }
 
-            var itemId = keyProperty.GetValue(item);
-            var result = dbSet.SingleOrDefault(p => keyProperty.GetValue(p).Equals(itemId));
+            var itemId = (long)keyProperty.GetValue(item); // Converta para long, ajustando conforme o tipo da chave
+            var result = dbSet.Find(itemId); // Use Find para obter a entidade com base no ID
 
             if (result != null)
             {
@@ -100,7 +105,7 @@ namespace GymBroINFRA.Repository
             }
             else
             {
-                return null;
+                throw new KeyNotFoundException("Entity with the given Id was not found.");
             }
         }
     }

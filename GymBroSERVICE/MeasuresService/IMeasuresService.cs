@@ -10,14 +10,16 @@ namespace GymBroSERVICE.MeasuresService
     public interface IMeasuresService
     {
         MeasuresResponseDTO Create(MeasuresCreateInputDTO measures);
-        
-        //MeasuresResponseDTO FindByID(long id);
 
-        //List<MeasuresResponseDTO> FindAll();
+        MeasuresResponseDTO FindByID(long id);
 
-        //MeasuresResponseDTO Update(MeasuresResponseDTO book);
+        List<MeasuresResponseDTO> FindAll();
 
-        //void Delete(long id);
+        MeasuresResponseDTO Update(MeasuresResponseDTO measures, long id);
+
+        void Delete(long id);
+
+       
 
     }
 }

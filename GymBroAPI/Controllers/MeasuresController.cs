@@ -15,8 +15,34 @@ namespace GymBroAPI.Controllers
             _service = services;
         }
 
+        [HttpGet]
+        public IActionResult GetAllMeasures()
+        {
+            return Ok(_service.FindAll());
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetOneMeasuresByID(long id)
+        {
+            return Ok(_service.FindByID(id));
+        }
+
         [HttpPost]
-        public IActionResult Post([FromBody] MeasuresCreateInputDTO input) => Ok(_service.Create(input));
+        public IActionResult SaveMeasures([FromBody] MeasuresCreateInputDTO input) => Ok(_service.Create(input));
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateMeasures(long id, [FromBody] MeasuresResponseDTO input)
+        {
+            var updatedMeasures = _service.Update(input, id);
+            return Ok(updatedMeasures);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteMeasure(long id)
+        {
+            _service.Delete(id);
+
+            return NoContent();
+        }
 
     }
 }

@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GymBroINFRA.Entity
 {
     [Table("measures")]
     public class Measures
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id")]
         public long Id
         {
@@ -35,9 +38,35 @@ namespace GymBroINFRA.Entity
             get; set;
         }
 
-        
+        [Column("right_quadriceps")]
+        public double RightQuadriceps
+        {
+            get; set;
+        }
 
-       
+        [Column("left_quadriceps")]
+        public double LeftQuadriceps
+        {
+            get; set;
+        }
+
+        [Column("right_calf")]
+        public double RightCalf
+        {
+            get; set;
+        }
+
+        [Column("left_calf")]
+        public double LeftCalf
+        {
+            get; set;
+        }
+
+
+
+
+
+
 
 
 

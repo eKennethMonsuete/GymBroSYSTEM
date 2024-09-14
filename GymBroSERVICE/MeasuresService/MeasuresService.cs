@@ -13,17 +13,88 @@ namespace GymBroSERVICE.MeasuresService
         {
             _repository = repository;
         }
+        public List<MeasuresResponseDTO> FindAll()
+        {
+            // Chama o repositório genérico para obter todas as entidades de Measures
+            var measuresEntities = _repository.FindAll();
 
+            // Mapeia as entidades Measures para MeasuresResponseDTO
+            var measuresDTOs = measuresEntities.Select(measure => new MeasuresResponseDTO
+            {
+                Id = measure.Id,
+                Weight = measure.Weight,
+                Hips = measure.Hips,
+                LeftBiceps = measure.LeftBiceps,
+                RightBiceps = measure.RightBiceps,
+                LeftQuadriceps = measure.LeftQuadriceps,
+                RightQuadriceps = measure.RightQuadriceps,
+                LeftCalf = measure.LeftCalf,
+                RightCalf = measure.RightCalf
+            }).ToList();
+
+            return measuresDTOs;
+        }
+
+        public MeasuresResponseDTO FindByID(long id)
+        {
+            // Busca a medida no repositório pelo ID
+            var measure = _repository.FindByID(id);
+
+            // Verifica se a medida foi encontrada
+            if (measure == null)
+            {
+                throw new KeyNotFoundException($"Medida com o ID {id} não foi encontrada.");
+            }
+
+            // Retorna o DTO preenchido com os dados da medida encontrada
+            var responseDTO = new MeasuresResponseDTO
+            {
+                Id = measure.Id,
+                Weight = measure.Weight,
+                Hips = measure.Hips,
+                LeftBiceps = measure.LeftBiceps,
+                RightBiceps = measure.RightBiceps,
+                LeftQuadriceps = measure.LeftQuadriceps,
+                RightQuadriceps = measure.RightQuadriceps,
+                LeftCalf = measure.LeftCalf,
+                RightCalf = measure.RightCalf
+            };
+
+            return responseDTO;
+        }
         public MeasuresResponseDTO Create(MeasuresCreateInputDTO measures)
         {
+
+            if (measures == null)
+            {
+                throw new ArgumentNullException( "As medidas não podem ser nulas.");
+            }
+
             //TODO: Validações
             var measure = new Measures
-            {
+            {   
+                Weight = measures.Weight,
                 Hips = measures.Hips,
                 LeftBiceps = measures.LeftBiceps,
                 RightBiceps = measures.RightBiceps,
-                Weight = measures.Weight
+                LeftQuadriceps = measures.LeftQuadriceps,
+                RightQuadriceps = measures.RightQuadriceps,
+                LeftCalf = measures.LeftCalf,
+                RightCalf = measures.RightCalf
+                
             };
+
+            if (measure.Weight < 0 ||
+                measure.Hips < 0 ||
+                measure.LeftBiceps < 0 ||
+                measure.RightBiceps < 0 ||
+                measure.LeftQuadriceps < 0 ||
+                measure.RightQuadriceps < 0 ||
+                measure.LeftCalf < 0 ||
+                measure.RightCalf < 0)
+            {
+                throw new ArgumentException("As medidas não podem ser menores que zero.");
+            }
 
             var result = _repository.Create(measure);
             
@@ -38,49 +109,87 @@ namespace GymBroSERVICE.MeasuresService
                 Weight = measure.Weight
             };
 
-            throw new NotImplementedException();
+            
+        }
+
+
+
+        public MeasuresResponseDTO Update(MeasuresResponseDTO measuresDTO, long id)
+        {
+            if (measuresDTO == null)
+            {
+                throw new ArgumentNullException(nameof(measuresDTO), "As medidas não podem ser nulas.");
+            }
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID inválido.", nameof(id));
+            }
+
+            // Busca a entidade existente
+            var existingMeasures = _repository.FindByID(id);
+
+            if (existingMeasures == null)
+            {
+                throw new KeyNotFoundException("Entidade com o ID fornecido não foi encontrada.");
+            }
+
+            // Atualiza as propriedades da entidade existente com os valores do DTO
+            existingMeasures.Weight = measuresDTO.Weight;
+            existingMeasures.Hips = measuresDTO.Hips;
+            existingMeasures.LeftBiceps = measuresDTO.LeftBiceps;
+            existingMeasures.RightBiceps = measuresDTO.RightBiceps;
+            existingMeasures.LeftQuadriceps = measuresDTO.LeftQuadriceps;
+            existingMeasures.RightQuadriceps = measuresDTO.RightQuadriceps;
+            existingMeasures.LeftCalf = measuresDTO.LeftCalf;
+            existingMeasures.RightCalf = measuresDTO.RightCalf;
+
+            // Atualiza a entidade no repositório
+            var updatedMeasures = _repository.Update(existingMeasures);
+
+            if (updatedMeasures == null)
+            {
+                throw new InvalidOperationException("Falha ao atualizar a entidade.");
+            }
+
+            // Converte a entidade atualizada de volta para DTO
+            var updatedMeasuresDTO = new MeasuresResponseDTO
+            {
+                Id = updatedMeasures.Id,
+                Weight = updatedMeasures.Weight,
+                Hips = updatedMeasures.Hips,
+                LeftBiceps = updatedMeasures.LeftBiceps,
+                RightBiceps = updatedMeasures.RightBiceps,
+                LeftQuadriceps = updatedMeasures.LeftQuadriceps,
+                RightQuadriceps = updatedMeasures.RightQuadriceps,
+                LeftCalf = updatedMeasures.LeftCalf,
+                RightCalf = updatedMeasures.RightCalf
+            };
+
+            return updatedMeasuresDTO;
         }
 
 
 
 
-        //public MeasuresResponseDTO Create(MeasuresCreateInputDTO measures)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public void Delete(long id)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public List<MeasuresResponseDTO> FindAll()
-        //{
-        //    var measures = _repository.FindAll();
+        public void Delete(long id)
+        {
+            try
+            {
+                _repository.Delete(id);
+            }
+            catch (KeyNotFoundException ex)
+            {                
+                throw new InvalidOperationException("A entidade com o ID fornecido não foi encontrada.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Falha ao tentar deletar a entidade.", ex);
+            }
+        }
 
-        //    // Converte a lista de Measures para MeasuresDTO
-        //    var measuresDTOs = measures.Select(measure => new MeasuresResponseDTO
-        //    {
-        //        Id = measure.Id,
-        //        Weight = measure.Weight,
-        //        RightBiceps = measure.RightBiceps,
-        //        LeftBiceps = measure.LeftBiceps,
-        //        Hips = measure.Hips,
-        //        // Adicione os outros campos conforme necessário
-        //    }).ToList();
-
-        //    return measuresDTOs;
-        //}
-
-        //public MeasuresResponseDTO FindByID(long id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public MeasuresResponseDTO Update(MeasuresResponseDTO book)
-        //{
-        //    throw new NotImplementedException();
-        //}
+       
     }
 }
 

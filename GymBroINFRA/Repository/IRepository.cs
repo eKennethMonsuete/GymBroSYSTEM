@@ -19,6 +19,6 @@ namespace GymBroINFRA.Repository
 
         void Delete(long id);
 
-        bool Exists(long id);
+        
     }
 }
