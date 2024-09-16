@@ -11,7 +11,11 @@ namespace GymBroINFRA.Context
         }
 
         public DbSet<Measures> Measures { get; set; }
-        //public DbSet<User> Users { get; set; }
+        public DbSet<User> Users
+        {
+            get; set;
+        }
+        
 
     }
 }

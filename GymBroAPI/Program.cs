@@ -2,6 +2,7 @@ using EvolveDb;
 using GymBroINFRA.Context;
 using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService;
+using GymBroSERVICE.UserService;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -19,6 +20,8 @@ internal class Program
         builder.Services.AddControllers();
 
         builder.Services.AddScoped<IMeasuresService, MeasuresService>();
+        builder.Services.AddScoped<IUserService, UserService>();
+
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 

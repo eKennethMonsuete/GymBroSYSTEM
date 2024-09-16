@@ -10,8 +10,4 @@
     <ProjectReference Include="..\GymBroINFRA\GymBroINFRA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UserService\" />
-  </ItemGroup>
-
 </Project>

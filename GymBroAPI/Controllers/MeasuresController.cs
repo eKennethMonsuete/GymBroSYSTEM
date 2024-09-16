@@ -30,7 +30,7 @@ namespace GymBroAPI.Controllers
         public IActionResult SaveMeasures([FromBody] MeasuresCreateInputDTO input) => Ok(_service.Create(input));
 
         [HttpPut("{id}")]
-        public IActionResult UpdateMeasures(long id, [FromBody] MeasuresResponseDTO input)
+        public IActionResult UpdateMeasures(long id, [FromBody] MeasuresUpdateInputDTO input)
         {
             var updatedMeasures = _service.Update(input, id);
             return Ok(updatedMeasures);

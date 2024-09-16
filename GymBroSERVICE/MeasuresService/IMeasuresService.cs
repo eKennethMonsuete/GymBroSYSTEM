@@ -15,7 +15,7 @@ namespace GymBroSERVICE.MeasuresService
 
         List<MeasuresResponseDTO> FindAll();
 
-        MeasuresResponseDTO Update(MeasuresResponseDTO measures, long id);
+        MeasuresResponseDTO Update(MeasuresUpdateInputDTO measures, long id);
 
         void Delete(long id);
 
