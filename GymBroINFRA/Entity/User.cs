@@ -30,6 +30,13 @@ namespace GymBroINFRA.Entity
         [Column("last_name")]
         public string LastName { get; set; }
 
+        
+       // public long MeasureId {get; set; }
+
+        public virtual ICollection<Measures>  Measures { get; set; }
+        
+        
+
 
 
 

@@ -62,6 +62,9 @@ namespace GymBroINFRA.Entity
             get; set;
         }
 
+        [Required]
+        public virtual long UserId { get; set; }
+
 
 
 

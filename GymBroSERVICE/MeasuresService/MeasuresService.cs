@@ -29,7 +29,8 @@ namespace GymBroSERVICE.MeasuresService
                 LeftQuadriceps = measure.LeftQuadriceps,
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
-                RightCalf = measure.RightCalf
+                RightCalf = measure.RightCalf,
+                UserId = measure.UserId,
             }).ToList();
 
             return measuresDTOs;
@@ -57,7 +58,8 @@ namespace GymBroSERVICE.MeasuresService
                 LeftQuadriceps = measure.LeftQuadriceps,
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
-                RightCalf = measure.RightCalf
+                RightCalf = measure.RightCalf,
+                UserId = measure.UserId
             };
 
             return responseDTO;
@@ -72,7 +74,7 @@ namespace GymBroSERVICE.MeasuresService
 
             //TODO: Validações
             var measure = new Measures
-            {   
+            {
                 Weight = measures.Weight,
                 Hips = measures.Hips,
                 LeftBiceps = measures.LeftBiceps,
@@ -80,8 +82,9 @@ namespace GymBroSERVICE.MeasuresService
                 LeftQuadriceps = measures.LeftQuadriceps,
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
-                RightCalf = measures.RightCalf
-                
+                RightCalf = measures.RightCalf,
+                UserId = measures.UserId
+
             };
 
             if (measure.Weight < 0 ||
@@ -91,7 +94,8 @@ namespace GymBroSERVICE.MeasuresService
                 measure.LeftQuadriceps < 0 ||
                 measure.RightQuadriceps < 0 ||
                 measure.LeftCalf < 0 ||
-                measure.RightCalf < 0)
+                measure.RightCalf < 0 ||
+                measures.UserId < 0)
             {
                 throw new ArgumentException("As medidas não podem ser menores que zero.");
             }

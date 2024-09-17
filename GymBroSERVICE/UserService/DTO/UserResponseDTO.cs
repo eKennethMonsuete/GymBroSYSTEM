@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymBroSERVICE.MeasuresService.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,5 +37,7 @@ namespace GymBroSERVICE.UserService.DTO
         {
             get; set;
         }
+
+        public ICollection<MeasuresResponseDTO> ResultsMeasures { get; set; }
     }
 }

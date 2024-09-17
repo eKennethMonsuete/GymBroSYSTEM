@@ -46,5 +46,9 @@
         {
             get; set;
         }
+
+        public long UserId
+        {
+        get; set; }
     }
 }

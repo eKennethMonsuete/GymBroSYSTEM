@@ -1,6 +1,8 @@
 ﻿using GymBroINFRA.Entity;
 using GymBroINFRA.Repository;
+using GymBroSERVICE.MeasuresService.DTO;
 using GymBroSERVICE.UserService.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,8 @@ namespace GymBroSERVICE.UserService
             return userDTO;
         }
 
+       
+
         public UserResponseDTO FindByID(long id)
         {
             var user = _repository.FindByID(id);
@@ -48,6 +52,18 @@ namespace GymBroSERVICE.UserService
                 Email = user.Email,
                 LastName = user.LastName,
                 Password = user.Password,
+                ResultsMeasures = user.Measures?.Select(measures => new MeasuresResponseDTO
+                {
+                    Id = measures.Id,
+                    Weight = measures.Weight,
+                    Hips = measures.Hips,
+                    LeftBiceps = measures.LeftBiceps,
+                    RightBiceps = measures.RightBiceps,
+                    LeftQuadriceps = measures.LeftQuadriceps,
+                    RightQuadriceps = measures.RightQuadriceps,
+                    LeftCalf = measures.LeftCalf,
+                    RightCalf = measures.RightCalf,
+                }).ToList()
             };
             return responseUserDTO;
         }

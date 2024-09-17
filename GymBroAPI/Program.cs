@@ -29,7 +29,7 @@ internal class Program
 
         builder.Services.AddDbContext<MySQLContext>(options =>
         {
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
 
         var app = builder.Build();
