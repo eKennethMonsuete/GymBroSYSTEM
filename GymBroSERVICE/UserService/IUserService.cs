@@ -13,9 +13,9 @@ namespace GymBroSERVICE.UserService
 
         UserResponseDTO Create(UserInputDTO user);
 
-        UserResponseDTO FindByID(long id);
+       // UserResponseDTO FindByID(long id);
 
-        List<UserResponseDTO> FindAll();
+       // List<UserResponseDTO> FindAll();
 
         UserResponseDTO Update(UserInputUpdateDTO user, long id);
 

@@ -21,6 +21,8 @@ internal class Program
 
         builder.Services.AddScoped<IMeasuresService, MeasuresService>();
         builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<ITeacherService, TeacherService>();
+
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

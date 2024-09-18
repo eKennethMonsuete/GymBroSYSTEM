@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GymBroINFRA.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,12 +13,14 @@ namespace GymBroINFRA.Entity
     [Table("user")]
     public class User
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-        public long Id { get; set;}  
-                            
+        public long Id
+        {
+            get; set;
+        }
+
         [Column("name")]
         public string Name { get; set; }
 
@@ -30,10 +33,14 @@ namespace GymBroINFRA.Entity
         [Column("last_name")]
         public string LastName { get; set; }
 
-        
-       // public long MeasureId {get; set; }
+        [Column("user_role")]
+        public UserRole userRole { get; set; }
+          
 
-        public virtual ICollection<Measures>  Measures { get; set; }
+
+        // public long MeasureId {get; set; }
+
+        //public virtual ICollection<Measures>  Measures { get; set; }
         
         
 

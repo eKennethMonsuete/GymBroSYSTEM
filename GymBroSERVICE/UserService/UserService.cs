@@ -21,52 +21,67 @@ namespace GymBroSERVICE.UserService
             _repository = repository;
         }
 
-        public List<UserResponseDTO> FindAll()
-        {
-            var UsersAtribbutes = _repository.FindAll();
+        //public List<UserResponseDTO> FindAll()
+        //{
+        //    var UsersAtribbutes = _repository.FindAll();
 
-            var userDTO = UsersAtribbutes.Select(user => new UserResponseDTO
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                LastName = user.LastName,
-                Password = user.Password,
-            }).ToList();
-            return userDTO;
-        }
+            
+        //    var userDTOs = UsersAtribbutes.Select(user => new UserResponseDTO
+        //    {
+        //        Id = user.Id,
+        //        Name = user.Name,
+        //        Email = user.Email,
+        //        LastName = user.LastName,
+        //        Password = user.Password,
+        //        ResultsMeasures = user.Measures?.Select(measures => new MeasuresResponseDTO
+        //        {
+        //            Id = measures.Id,
+        //            Weight = measures.Weight,
+        //            Hips = measures.Hips,
+        //            LeftBiceps = measures.LeftBiceps,
+        //            RightBiceps = measures.RightBiceps,
+        //            LeftQuadriceps = measures.LeftQuadriceps,
+        //            RightQuadriceps = measures.RightQuadriceps,
+        //            LeftCalf = measures.LeftCalf,
+        //            RightCalf = measures.RightCalf
+
+        //        }).ToList()
+        //    }).ToList();
+
+        //    return userDTOs;
+        //}
 
        
 
-        public UserResponseDTO FindByID(long id)
-        {
-            var user = _repository.FindByID(id);
-            if (user == null)
-            {
-                throw new KeyNotFoundException($"Usuário com o ID {id} não foi encontrada.");
-            }
-            var responseUserDTO = new UserResponseDTO()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                LastName = user.LastName,
-                Password = user.Password,
-                ResultsMeasures = user.Measures?.Select(measures => new MeasuresResponseDTO
-                {
-                    Id = measures.Id,
-                    Weight = measures.Weight,
-                    Hips = measures.Hips,
-                    LeftBiceps = measures.LeftBiceps,
-                    RightBiceps = measures.RightBiceps,
-                    LeftQuadriceps = measures.LeftQuadriceps,
-                    RightQuadriceps = measures.RightQuadriceps,
-                    LeftCalf = measures.LeftCalf,
-                    RightCalf = measures.RightCalf,
-                }).ToList()
-            };
-            return responseUserDTO;
-        }
+        //public UserResponseDTO FindByID(long id)
+        //{
+        //    var user = _repository.FindByID(id);
+        //    if (user == null)
+        //    {
+        //        throw new KeyNotFoundException($"Usuário com o ID {id} não foi encontrada.");
+        //    }
+        //    var responseUserDTO = new UserResponseDTO()
+        //    {
+        //        Id = user.Id,
+        //        Name = user.Name,
+        //        Email = user.Email,
+        //        LastName = user.LastName,
+        //        Password = user.Password,
+        //        ResultsMeasures = user.Measures?.Select(measures => new MeasuresResponseDTO
+        //        {
+        //            Id = measures.Id,
+        //            Weight = measures.Weight,
+        //            Hips = measures.Hips,
+        //            LeftBiceps = measures.LeftBiceps,
+        //            RightBiceps = measures.RightBiceps,
+        //            LeftQuadriceps = measures.LeftQuadriceps,
+        //            RightQuadriceps = measures.RightQuadriceps,
+        //            LeftCalf = measures.LeftCalf,
+        //            RightCalf = measures.RightCalf,
+        //        }).ToList()
+        //    };
+        //    return responseUserDTO;
+        //}
 
         public UserResponseDTO Create(UserInputDTO userInput)
         {

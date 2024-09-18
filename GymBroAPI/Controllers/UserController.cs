@@ -18,16 +18,16 @@ namespace GymBroAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public IActionResult GetAllUsers()
-        {
-            return Ok(_service.FindAll());
-        }
-        [HttpGet("{id}")]
-        public IActionResult GetOneUserByID(long id)
-        {
-            return Ok(_service.FindByID(id));
-        }
+        //[HttpGet]
+        //public IActionResult GetAllUsers()
+        //{
+        //    return Ok(_service.FindAll());
+        //}
+        //[HttpGet("{id}")]
+        //public IActionResult GetOneUserByID(long id)
+        //{
+        //    return Ok(_service.FindByID(id));
+        //}
 
         [HttpPost]
         public IActionResult SaveUser([FromBody] UserInputDTO input) => Ok(_service.Create(input));
