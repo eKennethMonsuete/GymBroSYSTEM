@@ -1,12 +1,13 @@
 ﻿using GymBroINFRA.Enums;
 using GymBroSERVICE.MeasuresService.DTO;
+using GymBroSERVICE.TeacherService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService.DTO
+namespace GymBroSERVICE.StudentService.DTO
 {
     public class StudentResponseDTO
     {
@@ -44,9 +45,9 @@ namespace GymBroSERVICE.UserService.DTO
         }
 
         // Treinos do aluno
-       // public ICollection<WorkoutResponseDTO>? Workouts{get; set;}
-        
-            
-        
+        // public ICollection<WorkoutResponseDTO>? Workouts{get; set;}
+
+
+
     }
 }

@@ -30,7 +30,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-                UserId = measure.UserId,
+                StudentId = measure.StudentId,
             }).ToList();
 
             return measuresDTOs;
@@ -59,7 +59,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-                UserId = measure.UserId
+                StudentId = measure.StudentId
             };
 
             return responseDTO;
@@ -83,7 +83,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
                 RightCalf = measures.RightCalf,
-                UserId = measures.UserId
+                StudentId = measures.StudentId
 
             };
 
@@ -94,8 +94,7 @@ namespace GymBroSERVICE.MeasuresService
                 measure.LeftQuadriceps < 0 ||
                 measure.RightQuadriceps < 0 ||
                 measure.LeftCalf < 0 ||
-                measure.RightCalf < 0 ||
-                measures.UserId < 0)
+                measure.RightCalf < 0 )
             {
                 throw new ArgumentException("As medidas não podem ser menores que zero.");
             }
@@ -146,6 +145,7 @@ namespace GymBroSERVICE.MeasuresService
             existingMeasures.RightQuadriceps = measuresInputUpdateDTO.RightQuadriceps;
             existingMeasures.LeftCalf = measuresInputUpdateDTO.LeftCalf;
             existingMeasures.RightCalf = measuresInputUpdateDTO.RightCalf;
+            existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
 
             // Atualiza a entidade no repositório
             var updatedMeasures = _repository.Update(existingMeasures);
@@ -158,7 +158,7 @@ namespace GymBroSERVICE.MeasuresService
             // Converte a entidade atualizada de volta para DTO
             var updatedMeasuresDTO = new MeasuresResponseDTO
             {
-        //id tava aqui se der erro 
+        
                 Id = existingMeasures.Id,
                 Weight = updatedMeasures.Weight,
                 Hips = updatedMeasures.Hips,
@@ -167,7 +167,8 @@ namespace GymBroSERVICE.MeasuresService
                 LeftQuadriceps = updatedMeasures.LeftQuadriceps,
                 RightQuadriceps = updatedMeasures.RightQuadriceps,
                 LeftCalf = updatedMeasures.LeftCalf,
-                RightCalf = updatedMeasures.RightCalf
+                RightCalf = updatedMeasures.RightCalf,
+                StudentId = updatedMeasures.StudentId
             };
 
             return updatedMeasuresDTO;

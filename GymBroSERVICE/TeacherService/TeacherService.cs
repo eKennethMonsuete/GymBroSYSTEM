@@ -1,13 +1,14 @@
 ﻿using GymBroINFRA.Entity;
 using GymBroINFRA.Repository;
-using GymBroSERVICE.UserService.DTO;
+using GymBroSERVICE.StudentService.DTO;
+using GymBroSERVICE.TeacherService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService
+namespace GymBroSERVICE.TeacherService
 {
     public class TeacherService : ITeacherService
     {

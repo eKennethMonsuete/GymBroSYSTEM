@@ -6,7 +6,7 @@ namespace GymBroINFRA.Entity;
     public class Student : User
     {
 
-        [ForeignKey("teacher_id")]
+    [ForeignKey("teacher_id")]
     public  long TeacherId
     {
         get; set;

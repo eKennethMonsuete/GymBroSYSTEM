@@ -1,7 +1,7 @@
-﻿using GymBroSERVICE.UserService.DTO;
-using GymBroSERVICE.UserService;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using GymBroSERVICE.StudentService;
+using GymBroSERVICE.StudentService.DTO;
 
 namespace GymBroAPI.Controllers
 {

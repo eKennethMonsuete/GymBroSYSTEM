@@ -46,5 +46,10 @@ namespace GymBroSERVICE.MeasuresService.DTO
         {
             get; set;
         }
+
+        public long StudentId
+        {
+            get; set;
+        }
     }
 }

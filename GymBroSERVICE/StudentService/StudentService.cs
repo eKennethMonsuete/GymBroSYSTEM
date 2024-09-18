@@ -1,6 +1,8 @@
 ﻿using GymBroINFRA.Entity;
 using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService.DTO;
+using GymBroSERVICE.StudentService.DTO;
+using GymBroSERVICE.TeacherService.DTO;
 using GymBroSERVICE.UserService.DTO;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService
+namespace GymBroSERVICE.StudentService
 {
     public class StudentService : IStudentService
     {
@@ -67,7 +69,7 @@ namespace GymBroSERVICE.UserService
                 Teacher = student.Teacher != null ? new TeacherResponseDTO
                 {
                     Id = student.Teacher.Id,
-                    
+
                     // Adicione outros campos de TeacherResponseDTO conforme necessário
                 } : null,
 
@@ -83,7 +85,7 @@ namespace GymBroSERVICE.UserService
                     RightQuadriceps = measure.RightQuadriceps,
                     LeftCalf = measure.LeftCalf,
                     RightCalf = measure.RightCalf
-                }).ToList()                                               
+                }).ToList()
             };
         }
 
@@ -96,7 +98,7 @@ namespace GymBroSERVICE.UserService
                 Email = studentDto.Email,
                 Password = studentDto.Password,
                 TeacherId = studentDto.TeacherId,
-                
+
                 // Adicione lógica para workout caso exista
             };
 

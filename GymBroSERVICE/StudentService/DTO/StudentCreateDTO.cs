@@ -5,14 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService.DTO
+namespace GymBroSERVICE.StudentService.DTO
 {
-    public class TeacherResponseDTO
+    public class StudentCreateDTO
     {
-        public long Id
-        {
-            get; set;
-        }
         public string Name
         {
             get; set;
@@ -21,26 +17,21 @@ namespace GymBroSERVICE.UserService.DTO
         {
             get; set;
         }
-        public string LastName
-        {
-            get; set;
-        }
         public string Password
         {
             get; set;
         }
+        public string LastName
+        {
+            get; set;
+        }
+        public long TeacherId
+        {
+            get; set;
+        }  // Referência ao professor
         public UserRole UserRole
         {
             get; set;
-        }
-
-        // Lista de estudantes que pertencem ao professor
-        public ICollection<StudentResponseDTO>? Students
-        {
-            get; set;
-        }
-
+        }  // Assumindo que o perfil seja definido
     }
-
-    
 }

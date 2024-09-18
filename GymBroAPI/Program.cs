@@ -2,6 +2,8 @@ using EvolveDb;
 using GymBroINFRA.Context;
 using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService;
+using GymBroSERVICE.StudentService;
+using GymBroSERVICE.TeacherService;
 using GymBroSERVICE.UserService;
 using Microsoft.EntityFrameworkCore;
 using Serilog;

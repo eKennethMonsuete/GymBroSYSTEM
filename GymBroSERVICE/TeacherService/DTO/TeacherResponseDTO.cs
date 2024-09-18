@@ -1,14 +1,19 @@
 ﻿using GymBroINFRA.Enums;
+using GymBroSERVICE.StudentService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService.DTO
+namespace GymBroSERVICE.TeacherService.DTO
 {
-    public class StudentCreateDTO
+    public class TeacherResponseDTO
     {
+        public long Id
+        {
+            get; set;
+        }
         public string Name
         {
             get; set;
@@ -17,21 +22,26 @@ namespace GymBroSERVICE.UserService.DTO
         {
             get; set;
         }
-        public string Password
-        {
-            get; set;
-        }
         public string LastName
         {
             get; set;
         }
-        public long TeacherId
+        public string Password
         {
             get; set;
-        }  // Referência ao professor
+        }
         public UserRole UserRole
         {
             get; set;
-        }  // Assumindo que o perfil seja definido
+        }
+
+        // Lista de estudantes que pertencem ao professor
+        public ICollection<StudentResponseDTO>? Students
+        {
+            get; set;
+        }
+
     }
+
+
 }

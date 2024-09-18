@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.UserService.DTO
+namespace GymBroSERVICE.TeacherService.DTO
 {
     public class TeacherCreateDTO
     {

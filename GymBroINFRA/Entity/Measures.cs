@@ -64,12 +64,11 @@ namespace GymBroINFRA.Entity
 
 
         [Required]
-        [ForeignKey("Student")]
-        [Column("user_id")]
-        public long UserId
+        [ForeignKey("student_id")]
+        public long StudentId
         {
             get; set;
-        } = 123;
+        }
 
 
         public virtual Student Student
