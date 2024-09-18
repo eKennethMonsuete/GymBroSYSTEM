@@ -32,7 +32,7 @@ namespace GymBroSERVICE.UserService.DTO
         }
 
         // Referência ao professor
-        public TeacherResponseDTO? Teacher
+        public TeacherResponseDTO Teacher
         {
             get; set;
         }

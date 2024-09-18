@@ -8,5 +8,7 @@ namespace GymBroINFRA.Entity
 {
     public class Workout
     {
+        public int Id { get; set; }
+        public string NameWork { get; set; }
     }
 }
