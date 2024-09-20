@@ -6,9 +6,7 @@ namespace GymBroINFRA.Entity
     [Table("measures")]
     public class Measures
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
+        
         public long Id
         {
             get; set;
@@ -63,14 +61,14 @@ namespace GymBroINFRA.Entity
         }
 
 
-        [Required]
-        [ForeignKey("student_id")]
+        
+        [ForeignKey("StudentId")]
         public long StudentId
         {
             get; set;
         }
 
-
+        
         public virtual Student Student
         {
             get; set;

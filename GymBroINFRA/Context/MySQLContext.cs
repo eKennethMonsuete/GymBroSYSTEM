@@ -1,4 +1,5 @@
-﻿using GymBroINFRA.Entity;
+﻿using GymBroINFRA.config;
+using GymBroINFRA.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymBroINFRA.Context
@@ -22,6 +23,16 @@ namespace GymBroINFRA.Context
         public DbSet<Teacher> Teachers
         {
             get; set;
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new MeasuresConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

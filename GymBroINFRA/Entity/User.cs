@@ -10,30 +10,30 @@ using System.Threading.Tasks;
 namespace GymBroINFRA.Entity
 {
 
-    [Table("user")]
+   // [Table("user")]
     public class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
+       // [Key]
+      //  [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       // [Column("id")]
         public long Id
         {
             get; set;
         }
 
-        [Column("name")]
+       // [Column("name")]
         public string Name { get; set; }
 
-        [Column("email")]
+      //  [Column("email")]
         public string Email { get; set; }
 
-        [Column("password")]
+      //  [Column("password")]
         public string Password { get; set; }
 
-        [Column("last_name")]
+      //  [Column("last_name")]
         public string LastName { get; set; }
 
-        [Column("user_role")]
+      //  [Column("user_role")]
         public UserRole userRole { get; set; }
           
 

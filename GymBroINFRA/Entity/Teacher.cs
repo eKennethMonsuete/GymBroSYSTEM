@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymBroINFRA.Entity
 {
-    [Table("teacher")]
+   // [Table("teacher")]
     public class Teacher : User
     {
 
