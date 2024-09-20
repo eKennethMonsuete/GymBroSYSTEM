@@ -1,7 +1,7 @@
 ﻿using GymBroINFRA.Entity;
 using GymBroINFRA.Repository;
+using GymBroSERVICE.PersonalService.DTO;
 using GymBroSERVICE.StudentService.DTO;
-using GymBroSERVICE.TeacherService.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.TeacherService
+namespace GymBroSERVICE.PersonalService
 {
     public class PersonalService : IPersonalService
     {
@@ -22,7 +22,7 @@ namespace GymBroSERVICE.TeacherService
 
         //DTOentrada - DTOSaida - Interface - SErvice
 
-        
+
         public List<PersonalListAllResponseDTO> FindAll()
         {
             var personal = _repository.FindAll();
@@ -32,11 +32,11 @@ namespace GymBroSERVICE.TeacherService
                 Name = teacher.Name,
                 Email = teacher.Email,
                 LastName = teacher.LastName,
-                Phone = teacher.Phone,                        
-                }).ToList();
-            }
+                Phone = teacher.Phone,
+            }).ToList();
+        }
 
-        
+
         public PersonalFindByIdResponse FindById(long id)
         {
             var personal = _repository.FindByID(id);
@@ -52,17 +52,18 @@ namespace GymBroSERVICE.TeacherService
                 LastName = personal.LastName,
                 Phone = personal.Phone,
                 Students = personal.Students?.Select(student => new StudentFindAllResponseDTO
-                {   Id = student.Id,
+                {
+                    Id = student.Id,
                     Name = student.Name,
                     Email = student.Email,
                     LastName = student.LastName,
                     Phone = student.Phone,
-                }).ToList() 
+                }).ToList()
             };
-            
+
         }
 
-        
+
         public PersonalListAllResponseDTO Create(PersonalCreateDTO personalDto)
         {
             var personal = new Personal
@@ -81,18 +82,18 @@ namespace GymBroSERVICE.TeacherService
                 Id = createdPersonal.Id,
                 Name = createdPersonal.Name,
                 Email = createdPersonal.Email,
-                
+
                 LastName = createdPersonal.LastName,
                 Phone = createdPersonal.Phone,
             };
         }
 
-        
+
         public PersonalListAllResponseDTO Update(long id, PersonalCreateDTO personalDto)
         {
             var existingPersonal = _repository.FindByID(id);
 
-            if (existingPersonal == null)  
+            if (existingPersonal == null)
                 throw new KeyNotFoundException("Personal não encontrado.");
 
             existingPersonal.Name = personalDto.Name;
@@ -109,12 +110,12 @@ namespace GymBroSERVICE.TeacherService
             }
             else
             {
-             
+
                 throw new ArgumentException("A senha não pode ser nula ou vazia.");
             }
 
-           
-                                
+
+
 
             var updatedPersonal = _repository.Update(existingPersonal);
 
@@ -125,11 +126,11 @@ namespace GymBroSERVICE.TeacherService
                 Email = updatedPersonal.Email,
                 LastName = updatedPersonal.LastName,
                 Phone = updatedPersonal.Phone
-                
+
             };
         }
 
-        
+
         public void Delete(long id)
         {
             var personal = _repository.FindByID(id);

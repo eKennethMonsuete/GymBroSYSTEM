@@ -1,19 +1,14 @@
 ﻿using GymBroINFRA.Enums;
-using GymBroSERVICE.StudentService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.TeacherService.DTO
+namespace GymBroSERVICE.PersonalService.DTO
 {
-    public class PersonalFindByIdResponse
+    public class PersonalCreateDTO
     {
-        public long Id
-        {
-            get; set;
-        }
         public string Name
         {
             get; set;
@@ -22,25 +17,20 @@ namespace GymBroSERVICE.TeacherService.DTO
         {
             get; set;
         }
+        public string Password
+        {
+            get; set;
+        }
         public string LastName
         {
             get; set;
         }
-        
         public string Phone
         {
             get; set;
         }
 
-        public ICollection<StudentFindAllResponseDTO>? Students
-        {
-            get; set;
-        }
-
-
 
 
     }
-
-
 }

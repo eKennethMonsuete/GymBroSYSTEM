@@ -1,6 +1,6 @@
 ﻿using GymBroINFRA.Enums;
 using GymBroSERVICE.MeasuresService.DTO;
-using GymBroSERVICE.TeacherService.DTO;
+using GymBroSERVICE.PersonalService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.TeacherService.DTO
+namespace GymBroSERVICE.PersonalService.DTO
 {
-    public class PersonalListAllResponseDTO
+    public class PersonalFindByIdResponse
     {
         public long Id
         {
@@ -26,14 +26,19 @@ namespace GymBroSERVICE.TeacherService.DTO
         {
             get; set;
         }
-        
+
         public string Phone
         {
             get; set;
         }
-     
 
-      
+        public ICollection<StudentFindAllResponseDTO>? Students
+        {
+            get; set;
+        }
+
+
+
 
     }
 

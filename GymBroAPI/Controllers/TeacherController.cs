@@ -1,5 +1,5 @@
-﻿using GymBroSERVICE.TeacherService;
-using GymBroSERVICE.TeacherService.DTO;
+﻿using GymBroSERVICE.PersonalService;
+using GymBroSERVICE.PersonalService.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]

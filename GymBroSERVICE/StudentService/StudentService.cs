@@ -1,8 +1,9 @@
 ﻿using GymBroINFRA.Entity;
 using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService.DTO;
+using GymBroSERVICE.PersonalService.DTO;
 using GymBroSERVICE.StudentService.DTO;
-using GymBroSERVICE.TeacherService.DTO;
+
 
 namespace GymBroSERVICE.StudentService
 {

@@ -1,11 +1,11 @@
-﻿using GymBroSERVICE.TeacherService.DTO;
+﻿using GymBroSERVICE.PersonalService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.TeacherService
+namespace GymBroSERVICE.PersonalService
 {
     public interface IPersonalService
     {
