@@ -77,7 +77,7 @@ namespace GymBroSERVICE.TeacherService
             {
                 Name = teacherDto.Name,
                 Email = teacherDto.Email,
-                Password = teacherDto.Password,
+                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(teacherDto.Password, 13),
                 LastName = teacherDto.LastName,
                 Ddd = teacherDto.Ddd,
                 Whatsapp= teacherDto.Whatsapp,
