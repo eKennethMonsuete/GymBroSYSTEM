@@ -27,18 +27,26 @@ namespace GymBroSERVICE.StudentService.DTO
         {
             get; set;
         }
+        public string Ddd
+        {
+            get; set;
+        }
+        public string Whatsapp
+        {
+            get; set;
+        }
         public UserRole UserRole
         {
             get; set;
         }
 
-        // Referência ao professor
+        
         public TeacherResponseDTO Teacher
         {
             get; set;
         }
 
-        // Medidas do aluno
+        
         public ICollection<MeasuresResponseDTO>? Measures
         {
             get; set;

@@ -25,6 +25,14 @@ namespace GymBroSERVICE.TeacherService.DTO
         {
             get; set;
         }
+        public string Whatsapp
+        {
+            get; set;
+        }
+        public string Ddd
+        {
+            get; set;
+        }
         public UserRole UserRole
         {
             get; set;

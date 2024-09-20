@@ -25,13 +25,22 @@ namespace GymBroSERVICE.StudentService.DTO
         {
             get; set;
         }
+        public string Whatsapp
+        {
+            get; set;
+        }
+
+        public string Ddd
+        {
+            get; set;
+        }
         public long TeacherId
         {
             get; set;
-        }  // Referência ao professor
+        }  
         public UserRole UserRole
         {
             get; set;
-        }  // Assumindo que o perfil seja definido
+        }  
     }
 }

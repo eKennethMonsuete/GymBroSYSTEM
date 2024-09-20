@@ -30,6 +30,8 @@ namespace GymBroSERVICE.TeacherService
                 Email = teacher.Email,
                 Password = teacher.Password,
                 LastName = teacher.LastName,
+                Ddd = teacher.Ddd,
+                Whatsapp = teacher.Whatsapp,
                 // Supondo que você queira mostrar os alunos do professor
                 Students = teacher.Students?.Select(student => new StudentResponseDTO
                 {
@@ -56,6 +58,8 @@ namespace GymBroSERVICE.TeacherService
                 Email = teacher.Email,
                 Password = teacher.Password,
                 LastName = teacher.LastName,
+                Ddd = teacher.Ddd,
+                Whatsapp = teacher.Whatsapp,
                 Students = teacher.Students?.Select(student => new StudentResponseDTO
                 {
                     Id = student.Id,
@@ -74,7 +78,9 @@ namespace GymBroSERVICE.TeacherService
                 Name = teacherDto.Name,
                 Email = teacherDto.Email,
                 Password = teacherDto.Password,
-                LastName = teacherDto.LastName
+                LastName = teacherDto.LastName,
+                Ddd = teacherDto.Ddd,
+                Whatsapp= teacherDto.Whatsapp,
             };
 
             var createdTeacher = _repository.Create(teacher);
@@ -85,7 +91,8 @@ namespace GymBroSERVICE.TeacherService
                 Name = createdTeacher.Name,
                 Email = createdTeacher.Email,
                 Password = createdTeacher.Password,
-                LastName = createdTeacher.LastName
+                LastName = createdTeacher.LastName,
+                Ddd = createdTeacher.Ddd,
             };
         }
 
@@ -101,6 +108,9 @@ namespace GymBroSERVICE.TeacherService
             existingTeacher.Email = teacherDto.Email;
             existingTeacher.Password = teacherDto.Password;
             existingTeacher.LastName = teacherDto.LastName;
+            existingTeacher.Ddd = teacherDto.Ddd;
+            existingTeacher.Whatsapp = teacherDto.Whatsapp;
+            existingTeacher.userRole = teacherDto.UserRole;
 
             var updatedTeacher = _repository.Update(existingTeacher);
 
@@ -110,7 +120,9 @@ namespace GymBroSERVICE.TeacherService
                 Name = updatedTeacher.Name,
                 Email = updatedTeacher.Email,
                 Password = updatedTeacher.Password,
-                LastName = updatedTeacher.LastName
+                LastName = updatedTeacher.LastName,
+                Ddd = updatedTeacher.Ddd,
+                UserRole = updatedTeacher.userRole
             };
         }
 

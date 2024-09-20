@@ -46,6 +46,28 @@ namespace GymBroINFRA.config
                 .IsRequired();
 
             
+            builder.Property(u => u.CreationDate)
+                .HasColumnName("creation_date")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");  
+
+            
+            builder.Property(u => u.IsActived)
+                .HasColumnName("is_actived")
+                .HasDefaultValue(true)
+                .IsRequired();
+
+            
+            builder.Property(u => u.Ddd)
+                .HasColumnName("ddd")
+                .HasMaxLength(3);
+
+            builder.Property(u => u.Whatsapp)
+               .HasColumnName("whatsapp")
+               .IsRequired();
+               
+
+
+
         }
     }
 }

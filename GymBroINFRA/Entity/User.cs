@@ -10,37 +10,33 @@ using System.Threading.Tasks;
 namespace GymBroINFRA.Entity
 {
 
-   // [Table("user")]
+   
     public class User
     {
-       // [Key]
-      //  [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-       // [Column("id")]
-        public long Id
-        {
-            get; set;
-        }
-
-       // [Column("name")]
+       
+        public long Id { get; set;}
+                                         
         public string Name { get; set; }
-
-      //  [Column("email")]
+              
         public string Email { get; set; }
-
-      //  [Column("password")]
+              
         public string Password { get; set; }
-
-      //  [Column("last_name")]
+              
         public string LastName { get; set; }
 
-      //  [Column("user_role")]
+        public string Whatsapp { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        public bool IsActived { get; set; }
+
+        public string Ddd { get; set; }
+              
         public UserRole userRole { get; set; }
           
 
 
-        // public long MeasureId {get; set; }
-
-        //public virtual ICollection<Measures>  Measures { get; set; }
+        
         
         
 

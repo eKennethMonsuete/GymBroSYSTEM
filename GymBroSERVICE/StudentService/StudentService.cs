@@ -30,6 +30,8 @@ namespace GymBroSERVICE.StudentService
                 Name = student.Name,
                 LastName = student.LastName,
                 Email = student.Email,
+                Ddd = student.Ddd,
+                Whatsapp = student.Whatsapp,
                 Teacher = student.Teacher != null ? new TeacherResponseDTO
                 {
                     Id = student.Teacher.Id,
@@ -66,6 +68,8 @@ namespace GymBroSERVICE.StudentService
                 Name = student.Name,
                 LastName = student.LastName,
                 Email = student.Email,
+                Ddd = student.Ddd,
+                Whatsapp = student.Whatsapp,
                 Teacher = student.Teacher != null ? new TeacherResponseDTO
                 {
                     Id = student.Teacher.Id,
@@ -97,6 +101,8 @@ namespace GymBroSERVICE.StudentService
                 LastName = studentDto.LastName,
                 Email = studentDto.Email,
                 Password = studentDto.Password,
+                Ddd = studentDto.Ddd,
+                Whatsapp = studentDto.Whatsapp,
                 TeacherId = studentDto.TeacherId,
 
                 // Adicione lógica para workout caso exista
@@ -114,6 +120,8 @@ namespace GymBroSERVICE.StudentService
             existingStudent.Name = studentDto.Name;
             existingStudent.LastName = studentDto.LastName;
             existingStudent.Email = studentDto.Email;
+            existingStudent.Whatsapp = studentDto.Whatsapp;
+            existingStudent.Ddd = studentDto.Ddd;
             existingStudent.TeacherId = studentDto.TeacherId;
             // Atualize medidas e treinos se necessário
 

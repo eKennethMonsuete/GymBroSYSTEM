@@ -4,6 +4,7 @@ using GymBroINFRA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20240920031212_User_Ddd_Whatsapp")]
+    partial class User_Ddd_Whatsapp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,8 +131,7 @@ namespace GymBroINFRA.Migrations
 
                     b.Property<string>("Whatsapp")
                         .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("whatsapp");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("userRole")
                         .HasColumnType("int")
