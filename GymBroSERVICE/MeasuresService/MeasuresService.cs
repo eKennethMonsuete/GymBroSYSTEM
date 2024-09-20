@@ -15,10 +15,10 @@ namespace GymBroSERVICE.MeasuresService
         }
         public List<MeasuresResponseDTO> FindAll()
         {
-            // Chama o repositório genérico para obter todas as entidades de Measures
+            
             var measuresEntities = _repository.FindAll();
 
-            // Mapeia as entidades Measures para MeasuresResponseDTO
+            
             var measuresDTOs = measuresEntities.Select(measure => new MeasuresResponseDTO
             {
                 Id = measure.Id,
@@ -30,7 +30,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-               // StudentId = measure.StudentId,
+                StudentId = measure.StudentId,
             }).ToList();
 
             return measuresDTOs;
@@ -38,16 +38,13 @@ namespace GymBroSERVICE.MeasuresService
 
         public MeasuresResponseDTO FindByID(long id)
         {
-            // Busca a medida no repositório pelo ID
             var measure = _repository.FindByID(id);
-
-            // Verifica se a medida foi encontrada
+                        
             if (measure == null)
             {
                 throw new KeyNotFoundException($"Medida com o ID {id} não foi encontrada.");
             }
-
-            // Retorna o DTO preenchido com os dados da medida encontrada
+                        
             var responseDTO = new MeasuresResponseDTO
             {
                 Id = measure.Id,
@@ -59,7 +56,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-               // StudentId = measure.StudentId
+                StudentId = measure.StudentId
             };
 
             return responseDTO;
@@ -72,7 +69,7 @@ namespace GymBroSERVICE.MeasuresService
                 throw new ArgumentNullException( "As medidas não podem ser nulas.");
             }
 
-            //TODO: Validações
+            
             var measure = new Measures
             {
                 Weight = measures.Weight,
@@ -83,7 +80,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
                 RightCalf = measures.RightCalf,
-               // StudentId = measures.StudentId
+                StudentId = measures.StudentId
 
             };
 
@@ -98,18 +95,27 @@ namespace GymBroSERVICE.MeasuresService
             {
                 throw new ArgumentException("As medidas não podem ser menores que zero.");
             }
-
-            var result = _repository.Create(measure);
-            
-            
-
-            return new MeasuresResponseDTO
+            if(measures.StudentId != null)
+                {
+                var result = _repository.Create(measure);
+                } else
             {
-                Id = result.Id,
+                throw new ArgumentException("É preciso passar o id de um aluno.");
+            }
+                                
+            return new MeasuresResponseDTO
+            {   Id = measure.Id,
                 Hips = measure.Hips,
                 LeftBiceps = measure.LeftBiceps,
                 RightBiceps = measure.RightBiceps,
-                Weight = measure.Weight
+                Weight = measure.Weight,
+                LeftQuadriceps = measures.LeftQuadriceps,
+                RightQuadriceps = measures.RightQuadriceps,
+                LeftCalf = measures.LeftCalf,
+                RightCalf = measures.RightCalf,
+                StudentId = measure.StudentId
+
+
             };
 
             
@@ -127,16 +133,25 @@ namespace GymBroSERVICE.MeasuresService
             {
                 throw new ArgumentException("ID inválido.", nameof(id));
             }
-
-            // Busca a entidade existente
+                        
             var existingMeasures = _repository.FindByID(id);
 
             if (existingMeasures == null)
             {
                 throw new KeyNotFoundException("Entidade com o ID fornecido não foi encontrada.");
             }
-
-            // Atualiza as propriedades da entidade existente com os valores do DTO
+            if (measuresInputUpdateDTO.Weight < 0 ||
+               measuresInputUpdateDTO.Hips < 0 ||
+               measuresInputUpdateDTO.LeftBiceps < 0 ||
+               measuresInputUpdateDTO.RightBiceps < 0 ||
+               measuresInputUpdateDTO.LeftQuadriceps < 0 ||
+               measuresInputUpdateDTO.RightQuadriceps < 0 ||
+               measuresInputUpdateDTO.LeftCalf < 0 ||
+               measuresInputUpdateDTO.RightCalf < 0)
+            {
+                throw new ArgumentException("As medidas não podem ser menores que zero.");
+            }
+                                    
             existingMeasures.Weight = measuresInputUpdateDTO.Weight;
             existingMeasures.Hips = measuresInputUpdateDTO.Hips;
             existingMeasures.LeftBiceps = measuresInputUpdateDTO.LeftBiceps;
@@ -145,9 +160,9 @@ namespace GymBroSERVICE.MeasuresService
             existingMeasures.RightQuadriceps = measuresInputUpdateDTO.RightQuadriceps;
             existingMeasures.LeftCalf = measuresInputUpdateDTO.LeftCalf;
             existingMeasures.RightCalf = measuresInputUpdateDTO.RightCalf;
-            //existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
+            existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
 
-            // Atualiza a entidade no repositório
+            
             var updatedMeasures = _repository.Update(existingMeasures);
 
             if (updatedMeasures == null)
@@ -155,7 +170,7 @@ namespace GymBroSERVICE.MeasuresService
                 throw new InvalidOperationException("Falha ao atualizar a entidade.");
             }
 
-            // Converte a entidade atualizada de volta para DTO
+            
             var updatedMeasuresDTO = new MeasuresResponseDTO
             {
         
@@ -168,7 +183,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = updatedMeasures.RightQuadriceps,
                 LeftCalf = updatedMeasures.LeftCalf,
                 RightCalf = updatedMeasures.RightCalf,
-               // StudentId = updatedMeasures.StudentId
+                StudentId = updatedMeasures.StudentId
             };
 
             return updatedMeasuresDTO;
