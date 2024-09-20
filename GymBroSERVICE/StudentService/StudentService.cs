@@ -3,12 +3,6 @@ using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService.DTO;
 using GymBroSERVICE.StudentService.DTO;
 using GymBroSERVICE.TeacherService.DTO;
-using GymBroSERVICE.UserService.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GymBroSERVICE.StudentService
 {
@@ -21,66 +15,40 @@ namespace GymBroSERVICE.StudentService
             _repository = repository;
         }
 
-        public List<StudentResponseDTO> FindAll()
+        public List<StudentFindAllResponseDTO> FindAll()
         {
             var students = _repository.FindAll();
-            return students.Select(student => new StudentResponseDTO
+            return students.Select(student => new StudentFindAllResponseDTO
             {
                 Id = student.Id,
                 Name = student.Name,
                 LastName = student.LastName,
                 Email = student.Email,
-                Ddd = student.Ddd,
-                Whatsapp = student.Whatsapp,
-                Teacher = student.Teacher != null ? new TeacherResponseDTO
-                {
-                    Id = student.Teacher.Id,
-                    Name = student.Teacher.Name,
-                    Email = student.Teacher.Email,
-                    LastName = student.Teacher.LastName,
-                    // Adicione outros campos de TeacherResponseDTO conforme necessário
-                } : null,
-
-                Measures = student.Measures?.Select(measure => new MeasuresResponseDTO
-                {
-                    Id = measure.Id,
-                    Weight = measure.Weight,
-                    Hips = measure.Hips,
-                    LeftBiceps = measure.LeftBiceps,
-                    RightBiceps = measure.RightBiceps,
-                    LeftQuadriceps = measure.LeftQuadriceps,
-                    RightQuadriceps = measure.RightQuadriceps,
-                    LeftCalf = measure.LeftCalf,
-                    RightCalf = measure.RightCalf
-                }).ToList(),
-
-            }).ToList();
+                Phone = student.Phone
+            }).ToList();                               
         }
 
-        public StudentResponseDTO FindById(long id)
+        public StudentFindByIdResponseDTO FindById(long id)
         {
             var student = _repository.FindByID(id);
-            if (student == null) throw new KeyNotFoundException("Student not found.");
-
-            return new StudentResponseDTO
+            if (student == null) throw new Exception("Student not found.");
+            return new StudentFindByIdResponseDTO
             {
                 Id = student.Id,
                 Name = student.Name,
                 LastName = student.LastName,
                 Email = student.Email,
-                Ddd = student.Ddd,
-                Whatsapp = student.Whatsapp,
-                Teacher = student.Teacher != null ? new TeacherResponseDTO
-                {
-                    Id = student.Teacher.Id,
+                Phone = student.Phone,
 
-                    // Adicione outros campos de TeacherResponseDTO conforme necessário
+                Personal = student.Personal != null ? new PersonalListAllResponseDTO
+                {
+                    Name = student.Personal.Name,
+                    Phone = student.Personal.Phone
+                   
                 } : null,
 
-
                 Measures = student.Measures?.Select(measure => new MeasuresResponseDTO
-                {
-                    Id = measure.Id,
+                {                 
                     Weight = measure.Weight,
                     Hips = measure.Hips,
                     LeftBiceps = measure.LeftBiceps,
@@ -91,9 +59,10 @@ namespace GymBroSERVICE.StudentService
                     RightCalf = measure.RightCalf
                 }).ToList()
             };
+            
         }
 
-        public StudentResponseDTO Create(StudentCreateDTO studentDto)
+        public StudentFindAllResponseDTO Create(StudentCreateDTO studentDto)
         {
             var student = new Student
             {
@@ -101,18 +70,24 @@ namespace GymBroSERVICE.StudentService
                 LastName = studentDto.LastName,
                 Email = studentDto.Email,
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
-                Ddd = studentDto.Ddd,
-                Whatsapp = studentDto.Whatsapp,
-                TeacherId = studentDto.TeacherId,
+                Phone = studentDto.Phone,
+                PersonalId = studentDto.PersonalId,
 
                 // Adicione lógica para workout caso exista
             };
 
             var createdStudent = _repository.Create(student);
-            return FindById(createdStudent.Id);
+            return new StudentFindAllResponseDTO
+            {
+                Id = createdStudent.Id,
+                Name = createdStudent.Name,
+                LastName = createdStudent.LastName,
+                Email = createdStudent.Email,
+                Phone = createdStudent.Phone,
+            };
         }
 
-        public StudentResponseDTO Update(long id, StudentCreateDTO studentDto)
+        public StudentFindByIdResponseDTO Update(long id, StudentCreateDTO studentDto)
         {
             var existingStudent = _repository.FindByID(id);
             if (existingStudent == null) throw new KeyNotFoundException("Student not found.");
@@ -120,6 +95,8 @@ namespace GymBroSERVICE.StudentService
             existingStudent.Name = studentDto.Name;
             existingStudent.LastName = studentDto.LastName;
             existingStudent.Email = studentDto.Email;
+            existingStudent.Phone = studentDto.Phone;
+            existingStudent.PersonalId = studentDto.PersonalId;
             if (!string.IsNullOrEmpty(studentDto.Password))
             {
                if (!BCrypt.Net.BCrypt.EnhancedVerify(studentDto.Password, existingStudent.Password))
@@ -132,11 +109,7 @@ namespace GymBroSERVICE.StudentService
             {
                 throw new ArgumentException("A senha não pode ser nula ou vazia.");
             }
-            existingStudent.Whatsapp = studentDto.Whatsapp;
-            existingStudent.Ddd = studentDto.Ddd;
-            existingStudent.TeacherId = studentDto.TeacherId;
-            // Atualize medidas e treinos se necessário
-
+           
             _repository.Update(existingStudent);
             return FindById(id);
         }

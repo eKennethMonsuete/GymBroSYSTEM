@@ -1,19 +1,15 @@
 ﻿using GymBroINFRA.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GymBroINFRA.config
 {
-    public class StudentConfiguration : IEntityTypeConfiguration<Student>
+    public class PersonalConfiguration : IEntityTypeConfiguration<Personal>
     {
-        public void Configure(EntityTypeBuilder<Student> builder)
+        public void Configure(EntityTypeBuilder<Personal> builder)
         {
-            builder.ToTable(nameof(Student));
+            builder.ToTable(nameof(Personal));
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name)
                 .HasMaxLength(100)
@@ -30,19 +26,12 @@ namespace GymBroINFRA.config
                 .HasDefaultValue(DateTime.Now)
                 .IsRequired(true);
 
-                               
+            builder.HasMany(p => p.Students).
+                WithOne(e => e.Personal)
+                .HasForeignKey(e => e.PersonalId);
 
-            builder.Property(s => s.PersonalId)
-                .IsRequired(false);
 
-            builder.HasOne(student => student.Personal)
-                .WithMany(personal => personal.Students)
-                .HasForeignKey(student => student.PersonalId);
-
-            builder.HasMany(p => p.Measures).
-               WithOne(e => e.Student)
-               .HasForeignKey(e => e.StudentId);
-
+            
         }
     }
 }

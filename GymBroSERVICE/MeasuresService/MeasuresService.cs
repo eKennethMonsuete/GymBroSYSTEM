@@ -30,7 +30,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-                StudentId = measure.StudentId,
+               // StudentId = measure.StudentId,
             }).ToList();
 
             return measuresDTOs;
@@ -59,7 +59,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
-                StudentId = measure.StudentId
+               // StudentId = measure.StudentId
             };
 
             return responseDTO;
@@ -83,7 +83,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
                 RightCalf = measures.RightCalf,
-                StudentId = measures.StudentId
+               // StudentId = measures.StudentId
 
             };
 
@@ -145,7 +145,7 @@ namespace GymBroSERVICE.MeasuresService
             existingMeasures.RightQuadriceps = measuresInputUpdateDTO.RightQuadriceps;
             existingMeasures.LeftCalf = measuresInputUpdateDTO.LeftCalf;
             existingMeasures.RightCalf = measuresInputUpdateDTO.RightCalf;
-            existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
+            //existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
 
             // Atualiza a entidade no repositório
             var updatedMeasures = _repository.Update(existingMeasures);
@@ -168,7 +168,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = updatedMeasures.RightQuadriceps,
                 LeftCalf = updatedMeasures.LeftCalf,
                 RightCalf = updatedMeasures.RightCalf,
-                StudentId = updatedMeasures.StudentId
+               // StudentId = updatedMeasures.StudentId
             };
 
             return updatedMeasuresDTO;

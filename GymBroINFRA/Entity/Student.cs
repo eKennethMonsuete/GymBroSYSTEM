@@ -2,30 +2,30 @@
 
 namespace GymBroINFRA.Entity;
 
-   [Table("students")]
+   
     public class Student : User
     {
 
-   
-   [ForeignKey("teacher_id")]
-    public  long TeacherId
+
+
+    public long? PersonalId
     {
         get; set;
     }
-    public virtual Teacher Teacher
+    public virtual Personal Personal
     {
         get; set;
     }
 
-    public virtual ICollection<Measures>? Measures
+    public virtual ICollection<Measures> Measures
     {
         get; set;
     }
 
     //public ICollection<Workout> Workouts{ get; set;}
-       
-    
-    
+
+
+
 
 
 

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 public class TeacherController : ControllerBase
 {
-    private readonly ITeacherService _teacherService;
+    private readonly IPersonalService _teacherService;
 
-    public TeacherController(ITeacherService teacherService)
+    public TeacherController(IPersonalService teacherService)
     {
         _teacherService = teacherService;
     }
@@ -54,26 +54,17 @@ public class TeacherController : ControllerBase
 
     // POST: api/teacher
     [HttpPost]
-    public IActionResult CreateTeacher([FromBody] TeacherCreateDTO teacherDto)
+    public IActionResult CreateTeacher([FromBody] PersonalCreateDTO teacherDto)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        try
-        {
-            var createdTeacher = _teacherService.Create(teacherDto);
-            return CreatedAtAction(nameof(GetTeacherById), new { id = createdTeacher.Id }, createdTeacher);
-        }
-        catch (Exception ex)
-        {
-            // Logging pode ser adicionado aqui
-            return StatusCode(500, "Erro ao criar professor: " + ex.Message);
-        }
+              
+          return Ok(_teacherService.Create(teacherDto));
+        
+       
     }
 
     // PUT: api/teacher/{id}
     [HttpPut("{id}")]
-    public IActionResult UpdateTeacher(long id, [FromBody] TeacherCreateDTO teacherDto)
+    public IActionResult UpdateTeacher(long id, [FromBody] PersonalCreateDTO teacherDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

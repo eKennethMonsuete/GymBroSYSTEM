@@ -9,14 +9,31 @@ namespace GymBroINFRA.config
     {
         public void Configure(EntityTypeBuilder<Measures> builder)
         {
-            builder.ToTable("measures");
+            builder.ToTable(nameof(Measures));
 
             builder.HasKey(m => m.Id);
 
-            builder.HasOne(m => m.Student) 
-                 .WithMany(s => s.Measures) 
-                 .HasForeignKey(m => m.StudentId) 
-                 .OnDelete(DeleteBehavior.Cascade); 
+            builder.Property(x => x.Weight);
+            builder.Property(x => x.RightBiceps);
+            builder.Property(x => x.LeftBiceps);
+            builder.Property(x => x.Hips);
+            builder.Property(x => x.RightQuadriceps);
+            builder.Property(x => x.LeftQuadriceps);
+            builder.Property(x => x.RightCalf);
+            builder.Property(x => x.LeftCalf);
+
+            builder.Property(s => s.StudentId)
+               .IsRequired(true);
+
+            builder.HasOne(measures => measures.Student )
+                .WithMany(student => student.Measures)
+                .HasForeignKey(m => m.StudentId);
+
+
+            //builder.HasOne(m => m.Student) 
+            //     .WithMany(s => s.Measures) 
+            //     .HasForeignKey(m => m.StudentId) 
+            //     .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

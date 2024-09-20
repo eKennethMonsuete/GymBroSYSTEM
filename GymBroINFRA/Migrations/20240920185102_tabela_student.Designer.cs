@@ -4,6 +4,7 @@ using GymBroINFRA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20240920185102_tabela_student")]
+    partial class tabela_student
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,48 +27,6 @@ namespace GymBroINFRA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("GymBroINFRA.Entity.Measures", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<double>("Hips")
-                        .HasColumnType("double");
-
-                    b.Property<double>("LeftBiceps")
-                        .HasColumnType("double");
-
-                    b.Property<double>("LeftCalf")
-                        .HasColumnType("double");
-
-                    b.Property<double>("LeftQuadriceps")
-                        .HasColumnType("double");
-
-                    b.Property<double>("RightBiceps")
-                        .HasColumnType("double");
-
-                    b.Property<double>("RightCalf")
-                        .HasColumnType("double");
-
-                    b.Property<double>("RightQuadriceps")
-                        .HasColumnType("double");
-
-                    b.Property<long>("StudentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Measures", (string)null);
-                });
 
             modelBuilder.Entity("GymBroINFRA.Entity.Personal", b =>
                 {
@@ -78,7 +39,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(6443));
+                        .HasDefaultValue(new DateTime(2024, 9, 20, 15, 51, 2, 615, DateTimeKind.Local).AddTicks(2388));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -120,7 +81,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(2076));
+                        .HasDefaultValue(new DateTime(2024, 9, 20, 15, 51, 2, 615, DateTimeKind.Local).AddTicks(393));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -142,48 +103,13 @@ namespace GymBroINFRA.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("PersonalId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonalId");
-
                     b.ToTable("Student", (string)null);
-                });
-
-            modelBuilder.Entity("GymBroINFRA.Entity.Measures", b =>
-                {
-                    b.HasOne("GymBroINFRA.Entity.Student", "Student")
-                        .WithMany("Measures")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("GymBroINFRA.Entity.Student", b =>
-                {
-                    b.HasOne("GymBroINFRA.Entity.Personal", "Personal")
-                        .WithMany("Students")
-                        .HasForeignKey("PersonalId");
-
-                    b.Navigation("Personal");
-                });
-
-            modelBuilder.Entity("GymBroINFRA.Entity.Personal", b =>
-                {
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("GymBroINFRA.Entity.Student", b =>
-                {
-                    b.Navigation("Measures");
                 });
 #pragma warning restore 612, 618
         }

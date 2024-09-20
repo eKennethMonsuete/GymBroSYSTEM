@@ -24,15 +24,15 @@ namespace GymBroINFRA.Entity
               
         public string LastName { get; set; }
 
-        public string Whatsapp { get; set; }
+        public string Phone { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public bool IsActived { get; set; }
 
-        public string Ddd { get; set; }
+       // public string Ddd { get; set; }
               
-        public UserRole userRole { get; set; }
+       // public UserRole userRole { get; set; }
           
 
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.StudentService.DTO
 {
-    public class StudentResponseDTO
+    public class StudentFindAllResponseDTO
     {
         public long Id
         {
@@ -27,30 +27,24 @@ namespace GymBroSERVICE.StudentService.DTO
         {
             get; set;
         }
-        public string Ddd
+        public string Phone
         {
             get; set;
         }
-        public string Whatsapp
-        {
-            get; set;
-        }
-        public UserRole UserRole
-        {
-            get; set;
-        }
+       
+       
 
         
-        public TeacherResponseDTO Teacher
-        {
-            get; set;
-        }
+        //public PersonalListAllResponseDTO Teacher
+        //{
+        //    get; set;
+        //}
 
         
-        public ICollection<MeasuresResponseDTO>? Measures
-        {
-            get; set;
-        }
+        //public ICollection<MeasuresResponseDTO>? Measures
+        //{
+        //    get; set;
+        //}
 
         // Treinos do aluno
         // public ICollection<WorkoutResponseDTO>? Workouts{get; set;}

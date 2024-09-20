@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace GymBroINFRA.Entity
 {
-   // [Table("teacher")]
-    public class Teacher : User
+   
+    public class Personal : User
     {
 
-        public virtual ICollection<Student>? Students
+
+
+        public virtual ICollection<Student> Students
         {
             get; set;
         }

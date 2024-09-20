@@ -9,10 +9,10 @@ namespace GymBroSERVICE.StudentService
 {
     public interface IStudentService
     {
-        List<StudentResponseDTO> FindAll();
-        StudentResponseDTO FindById(long id);
-        StudentResponseDTO Create(StudentCreateDTO teacherDto);
-        StudentResponseDTO Update(long id, StudentCreateDTO teacherDto);
+        List<StudentFindAllResponseDTO> FindAll();
+        StudentFindByIdResponseDTO FindById(long id);
+        StudentFindAllResponseDTO Create(StudentCreateDTO teacherDto);
+        StudentFindByIdResponseDTO Update(long id, StudentCreateDTO teacherDto);
         void Delete(long id);
     }
 }

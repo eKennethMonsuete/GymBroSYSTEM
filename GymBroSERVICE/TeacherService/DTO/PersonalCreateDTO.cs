@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.TeacherService.DTO
 {
-    public class TeacherCreateDTO
+    public class PersonalCreateDTO
     {
         public string Name
         {
@@ -25,18 +25,12 @@ namespace GymBroSERVICE.TeacherService.DTO
         {
             get; set;
         }
-        public string Whatsapp
+        public string Phone
         {
             get; set;
         }
-        public string Ddd
-        {
-            get; set;
-        }
-        public UserRole UserRole
-        {
-            get; set;
-        }
+       
+       
 
     }
 }

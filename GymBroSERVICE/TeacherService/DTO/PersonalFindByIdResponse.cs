@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.TeacherService.DTO
 {
-    public class TeacherResponseDTO
+    public class PersonalFindByIdResponse
     {
         public long Id
         {
@@ -26,28 +26,19 @@ namespace GymBroSERVICE.TeacherService.DTO
         {
             get; set;
         }
-        public string Password
-        {
-            get; set;
-        }
-        public string Whatsapp
-        {
-            get; set;
-        }
-        public string Ddd
-        {
-            get; set;
-        }
-        public UserRole UserRole
+        
+        public string Phone
         {
             get; set;
         }
 
-        // Lista de estudantes que pertencem ao professor
-        public ICollection<StudentResponseDTO>? Students
+        public ICollection<StudentFindAllResponseDTO>? Students
         {
             get; set;
         }
+
+
+
 
     }
 
