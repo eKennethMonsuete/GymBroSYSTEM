@@ -100,7 +100,7 @@ namespace GymBroSERVICE.StudentService
                 Name = studentDto.Name,
                 LastName = studentDto.LastName,
                 Email = studentDto.Email,
-                Password = studentDto.Password,
+                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
                 Ddd = studentDto.Ddd,
                 Whatsapp = studentDto.Whatsapp,
                 TeacherId = studentDto.TeacherId,
@@ -120,6 +120,18 @@ namespace GymBroSERVICE.StudentService
             existingStudent.Name = studentDto.Name;
             existingStudent.LastName = studentDto.LastName;
             existingStudent.Email = studentDto.Email;
+            if (!string.IsNullOrEmpty(studentDto.Password))
+            {
+               if (!BCrypt.Net.BCrypt.EnhancedVerify(studentDto.Password, existingStudent.Password))
+               {
+                    
+                    existingStudent.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13);
+               }
+            }
+            else
+            {
+                throw new ArgumentException("A senha não pode ser nula ou vazia.");
+            }
             existingStudent.Whatsapp = studentDto.Whatsapp;
             existingStudent.Ddd = studentDto.Ddd;
             existingStudent.TeacherId = studentDto.TeacherId;

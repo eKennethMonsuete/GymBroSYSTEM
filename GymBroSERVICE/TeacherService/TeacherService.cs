@@ -80,7 +80,7 @@ namespace GymBroSERVICE.TeacherService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(teacherDto.Password, 13),
                 LastName = teacherDto.LastName,
                 Ddd = teacherDto.Ddd,
-                Whatsapp= teacherDto.Whatsapp,
+                Whatsapp = teacherDto.Whatsapp,
             };
 
             var createdTeacher = _repository.Create(teacher);
@@ -96,21 +96,38 @@ namespace GymBroSERVICE.TeacherService
             };
         }
 
-        // Atualiza um professor existente
+        
         public TeacherResponseDTO Update(long id, TeacherCreateDTO teacherDto)
         {
             var existingTeacher = _repository.FindByID(id);
 
-            if (existingTeacher == null)
+            if (existingTeacher == null)  
                 throw new KeyNotFoundException("Professor não encontrado.");
 
             existingTeacher.Name = teacherDto.Name;
             existingTeacher.Email = teacherDto.Email;
-            existingTeacher.Password = teacherDto.Password;
+
+            if (!string.IsNullOrEmpty(teacherDto.Password))
+            {
+                // Verifica se a senha enviada no DTO é diferente da senha criptografada no banco
+                if (!BCrypt.Net.BCrypt.EnhancedVerify(teacherDto.Password, existingTeacher.Password))
+                {
+                    // Se a senha for diferente, criptografa a nova senha
+                    existingTeacher.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(teacherDto.Password, 13);
+                }
+            }
+            else
+            {
+                // Aqui você pode logar um aviso ou tratar a situação onde a senha está nula
+                throw new ArgumentException("A senha não pode ser nula ou vazia.");
+            }
+
             existingTeacher.LastName = teacherDto.LastName;
             existingTeacher.Ddd = teacherDto.Ddd;
             existingTeacher.Whatsapp = teacherDto.Whatsapp;
             existingTeacher.userRole = teacherDto.UserRole;
+            
+            
 
             var updatedTeacher = _repository.Update(existingTeacher);
 
