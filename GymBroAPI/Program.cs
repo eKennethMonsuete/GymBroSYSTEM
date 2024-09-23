@@ -1,6 +1,7 @@
 using EvolveDb;
 using GymBroINFRA.Context;
 using GymBroINFRA.Repository;
+using GymBroSERVICE.AuthService;
 using GymBroSERVICE.MeasuresService;
 using GymBroSERVICE.PersonalService;
 using GymBroSERVICE.StudentService;
@@ -25,6 +26,7 @@ internal class Program
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IPersonalService, PersonalService>();
         builder.Services.AddScoped<IStudentService, StudentService>();
+        builder.Services.AddScoped<IAuth, AuthService>();
 
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

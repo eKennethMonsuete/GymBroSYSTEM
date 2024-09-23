@@ -34,6 +34,13 @@ namespace GymBroINFRA.Repository
             return entity;
         }
 
+        public T FindByEmail(string email)
+        {
+            var entity = dbSet.FirstOrDefault(e => EF.Property<string>(e, "Email") == email);
+
+            return entity;
+        }
+
 
         public T Create(T item)
         {

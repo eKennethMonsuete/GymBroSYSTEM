@@ -22,12 +22,15 @@ namespace GymBroINFRA.Context
             get; set;
         }
 
+       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new PersonalConfiguration());
             modelBuilder.ApplyConfiguration(new MeasuresConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

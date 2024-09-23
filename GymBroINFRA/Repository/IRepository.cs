@@ -19,6 +19,6 @@ namespace GymBroINFRA.Repository
 
         void Delete(long id);
 
-        
+        T FindByEmail(string email);
     }
 }

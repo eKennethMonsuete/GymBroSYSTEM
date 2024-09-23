@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.AuthService.DTO
 {
-    internal class AuthDTO
+    public class AuthDTO
     {
 
         public string Email { get; set; }
