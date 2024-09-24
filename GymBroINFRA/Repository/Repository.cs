@@ -1,5 +1,8 @@
 ﻿using GymBroINFRA.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using System.Threading;
 
 namespace GymBroINFRA.Repository
 {
@@ -80,10 +83,6 @@ namespace GymBroINFRA.Repository
 
         }
 
-
-
-
-
         public T Update(T item)
         {
             // Assumindo que T tem uma propriedade Id do tipo long
@@ -114,6 +113,17 @@ namespace GymBroINFRA.Repository
             {
                 throw new KeyNotFoundException("Entity with the given Id was not found.");
             }
+        }
+
+        public IQueryable<T> Where(Expression<Func<T, bool>> filter = null)
+        {
+            if (filter != null)
+            {
+                {
+                    return dbSet.Where(filter).AsNoTracking();
+                }
+            }
+            return null;
         }
     }
 }

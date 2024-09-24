@@ -64,7 +64,7 @@ public class TeacherController : ControllerBase
 
     // PUT: api/teacher/{id}
     [HttpPut("{id}")]
-    public IActionResult UpdateTeacher(long id, [FromBody] PersonalCreateDTO teacherDto)
+    public IActionResult UpdateTeacher(long id, [FromBody] PersonalUpdateDTO teacherDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

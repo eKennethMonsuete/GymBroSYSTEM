@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace GymBroINFRA.Entity
 {
-   
-    public class Personal 
+
+    public class Personal
     {
         public long Id
         {
@@ -21,15 +21,6 @@ namespace GymBroINFRA.Entity
             get; set;
         }
 
-        public string Email
-        {
-            get; set;
-        }
-
-        public string Password
-        {
-            get; set;
-        }
 
         public string LastName
         {
@@ -52,7 +43,7 @@ namespace GymBroINFRA.Entity
         }
 
         public long UserId
-        { 
+        {
             get; set;
         }
 

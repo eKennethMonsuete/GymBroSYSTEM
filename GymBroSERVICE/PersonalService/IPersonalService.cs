@@ -19,7 +19,7 @@ namespace GymBroSERVICE.PersonalService
         PersonalListAllResponseDTO Create(PersonalCreateDTO teacherDto);
 
 
-        PersonalListAllResponseDTO Update(long id, PersonalCreateDTO teacherDto);
+        PersonalListAllResponseDTO Update(long id, PersonalUpdateDTO teacherDto);
 
 
         void Delete(long id);

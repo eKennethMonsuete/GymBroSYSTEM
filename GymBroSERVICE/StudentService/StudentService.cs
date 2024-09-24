@@ -46,7 +46,7 @@ namespace GymBroSERVICE.StudentService
                 Personal = student.Personal != null ? new PersonalResponseToStudentDTO
                 {
                     Name = student.Personal.Name,
-                    Email = student.Personal.Email,
+                    //Email = student.Personal.Email,
                     Phone = student.Personal.Phone
                     
                    
@@ -86,7 +86,7 @@ namespace GymBroSERVICE.StudentService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
                 Phone = studentDto.Phone,
                 PersonalId = studentDto.PersonalId,
-                UserId = userResult.Id,
+                //UserId = userResult.Id,
 
                 // Adicione lógica para workout caso exista
             };
