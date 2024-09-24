@@ -95,11 +95,11 @@ namespace GymBroSERVICE.UserService
                 Email = userInput.Email,
                 Password = userInput.Password,
             };
-            var result = _repository.Create(user);
+            var UserResult = _repository.Create(user);
 
             return new UserResponseDTO
             {
-                Id = result.Id,
+                Id = UserResult.Id,
                 Name = userInput.Name,
                 Email = userInput.Email,
                 LastName = userInput.LastName,

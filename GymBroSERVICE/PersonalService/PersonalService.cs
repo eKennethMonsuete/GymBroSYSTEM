@@ -14,10 +14,12 @@ namespace GymBroSERVICE.PersonalService
     public class PersonalService : IPersonalService
     {
         private readonly IRepository<Personal> _repository;
+        private readonly IRepository<User> _UserRepository;
 
-        public PersonalService(IRepository<Personal> repository)
+        public PersonalService(IRepository<Personal> repository, IRepository<User> userRepository)
         {
             _repository = repository;
+            _UserRepository = userRepository;
         }
 
         //DTOentrada - DTOSaida - Interface - SErvice
@@ -66,6 +68,14 @@ namespace GymBroSERVICE.PersonalService
 
         public PersonalListAllResponseDTO Create(PersonalCreateDTO personalDto)
         {
+            var user = new User
+            {
+                Email = personalDto.Email,
+                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(personalDto.Password, 13),
+            };
+
+            var userResult = _UserRepository.Create(user);
+
             var personal = new Personal
             {
                 Name = personalDto.Name,
@@ -73,9 +83,14 @@ namespace GymBroSERVICE.PersonalService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(personalDto.Password, 13),
                 LastName = personalDto.LastName,
                 Phone = personalDto.Phone,
+                UserId = userResult.Id,
             };
 
             var createdPersonal = _repository.Create(personal);
+
+            user.PersonalId = personal.Id;
+            _UserRepository.Update(user);
+
 
             return new PersonalListAllResponseDTO
             {

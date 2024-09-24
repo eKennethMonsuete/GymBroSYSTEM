@@ -19,6 +19,11 @@ namespace GymBroINFRA.config
 
             builder.Property(x => x.Email);
             builder.Property(x => x.Password);
+
+            
+
+            builder.HasOne(p => p.Personal).WithOne().HasForeignKey<User>(p => p.PersonalId);
+            builder.HasOne(p => p.Student).WithOne().HasForeignKey<User>(p => p.StudentId);
         }
     }
 }

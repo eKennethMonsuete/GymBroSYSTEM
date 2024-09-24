@@ -10,10 +10,12 @@ namespace GymBroSERVICE.StudentService
     public class StudentService : IStudentService
     {
         private readonly IRepository<Student> _repository;
+        private readonly IRepository<User> _UserRepository;
 
-        public StudentService(IRepository<Student> repository)
+        public StudentService(IRepository<Student> repository, IRepository<User> userRepository)
         {
             _repository = repository;
+            _UserRepository = userRepository;
         }
 
         public List<StudentFindAllResponseDTO> FindAll()
@@ -67,6 +69,15 @@ namespace GymBroSERVICE.StudentService
 
         public StudentFindAllResponseDTO Create(StudentCreateDTO studentDto)
         {
+            var user = new User
+            {
+                Email = studentDto.Email,
+                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
+            };
+
+            var userResult = _UserRepository.Create(user);
+
+
             var student = new Student
             {
                 Name = studentDto.Name,
@@ -75,11 +86,17 @@ namespace GymBroSERVICE.StudentService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
                 Phone = studentDto.Phone,
                 PersonalId = studentDto.PersonalId,
+                UserId = userResult.Id,
 
                 // Adicione lógica para workout caso exista
             };
 
             var createdStudent = _repository.Create(student);
+
+            user.StudentId = student.Id;
+            _UserRepository.Update(user);
+
+
             return new StudentFindAllResponseDTO
             {
                 Id = createdStudent.Id,

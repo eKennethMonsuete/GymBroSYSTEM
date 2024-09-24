@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240924184818_user-personal")]
-    partial class userpersonal
+    [Migration("20240924191733_Nova-Initial")]
+    partial class NovaInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(9528));
+                        .HasDefaultValue(new DateTime(2024, 9, 24, 16, 17, 33, 567, DateTimeKind.Local).AddTicks(358));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -129,7 +129,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(6941));
+                        .HasDefaultValue(new DateTime(2024, 9, 24, 16, 17, 33, 566, DateTimeKind.Local).AddTicks(7060));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -184,7 +184,13 @@ namespace GymBroINFRA.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<long>("PersonalId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonalId")
+                        .IsUnique();
 
                     b.ToTable("User", (string)null);
                 });
@@ -216,6 +222,17 @@ namespace GymBroINFRA.Migrations
                     b.HasOne("GymBroINFRA.Entity.Personal", "Personal")
                         .WithMany("Students")
                         .HasForeignKey("PersonalId");
+
+                    b.Navigation("Personal");
+                });
+
+            modelBuilder.Entity("GymBroINFRA.Entity.User", b =>
+                {
+                    b.HasOne("GymBroINFRA.Entity.Personal", "Personal")
+                        .WithOne()
+                        .HasForeignKey("GymBroINFRA.Entity.User", "PersonalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Personal");
                 });

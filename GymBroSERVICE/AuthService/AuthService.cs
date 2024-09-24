@@ -12,9 +12,9 @@ namespace GymBroSERVICE.AuthService
     public class AuthService : IAuth
     {
 
-        private readonly IRepository<Personal> _repository;
+        private readonly IRepository<User> _repository;
 
-        public AuthService(IRepository<Personal> repository)
+        public AuthService(IRepository<User> repository)
         {
             _repository = repository;
         }
