@@ -1,7 +1,5 @@
-﻿using GymBroSERVICE.MeasuresService.DTO;
-using GymBroSERVICE.UserService;
-using GymBroSERVICE.UserService.DTO;
-using Microsoft.AspNetCore.Http;
+﻿using GymBroSERVICE.UserServices;
+using GymBroSERVICE.UserServices.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymBroAPI.Controllers
@@ -18,34 +16,11 @@ namespace GymBroAPI.Controllers
             _service = service;
         }
 
-        //[HttpGet]
-        //public IActionResult GetAllUsers()
-        //{
-        //    return Ok(_service.FindAll());
-        //}
-        //[HttpGet("{id}")]
-        //public IActionResult GetOneUserByID(long id)
-        //{
-        //    return Ok(_service.FindByID(id));
-        //}
-
-        [HttpPost]
-        public IActionResult SaveUser([FromBody] UserInputDTO input) => Ok(_service.Create(input));
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(long id, [FromBody] UserInputUpdateDTO input)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginDTO authDTO)
         {
-            var updatedUser = _service.Update(input, id);
-            return Ok(updatedUser);
+
+            return Ok(_service.Login(authDTO));
         }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser(long id)
-        {
-            _service.Delete(id);
-
-            return NoContent();
-        }
-
     }
 }

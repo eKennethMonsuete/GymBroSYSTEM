@@ -66,7 +66,7 @@ namespace GymBroSERVICE.PersonalService
 
             var user = new User
             {
-                Email = personalDto.Email,
+                Email = personalDto.Email.ToLower(),
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(personalDto.Password, 13),
             };
 
