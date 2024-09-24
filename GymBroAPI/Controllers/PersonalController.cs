@@ -1,25 +1,27 @@
 ﻿using GymBroSERVICE.PersonalService;
 using GymBroSERVICE.PersonalService.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
+[Authorize(Roles = "PERSONAL")]
 [Route("api/[controller]")]
-public class TeacherController : ControllerBase
+public class PersonalController : ControllerBase
 {
-    private readonly IPersonalService _teacherService;
+    private readonly IPersonalService _personalService;
 
-    public TeacherController(IPersonalService teacherService)
+    public PersonalController(IPersonalService personalService)
     {
-        _teacherService = teacherService;
+        _personalService = personalService;
     }
 
     // GET: api/teacher
     [HttpGet]
-    public IActionResult GetAllTeachers()
+    public IActionResult GetAllPersonals()
     {
         try
         {
-            var teachers = _teacherService.FindAll();
+            var teachers = _personalService.FindAll();
             return Ok(teachers);
         }
         catch (Exception ex)
@@ -31,11 +33,11 @@ public class TeacherController : ControllerBase
 
     // GET: api/teacher/{id}
     [HttpGet("{id}")]
-    public IActionResult GetTeacherById(long id)
+    public IActionResult GetPersonalById(long id)
     {
         try
         {
-            var teacher = _teacherService.FindById(id);
+            var teacher = _personalService.FindById(id);
             if (teacher == null)
                 return NotFound("Professor não encontrado.");
 
@@ -53,25 +55,25 @@ public class TeacherController : ControllerBase
     }
 
     // POST: api/teacher
+    [AllowAnonymous]
     [HttpPost]
-    public IActionResult CreateTeacher([FromBody] PersonalCreateDTO teacherDto)
+    public IActionResult CreatePersonal([FromBody] PersonalCreateDTO teacherDto)
     {
               
-          return Ok(_teacherService.Create(teacherDto));
-        
+          return Ok(_personalService.Create(teacherDto));
        
     }
 
     // PUT: api/teacher/{id}
     [HttpPut("{id}")]
-    public IActionResult UpdateTeacher(long id, [FromBody] PersonalUpdateDTO teacherDto)
+    public IActionResult UpdatePersonal(long id, [FromBody] PersonalUpdateDTO teacherDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         try
         {
-            var updatedTeacher = _teacherService.Update(id, teacherDto);
+            var updatedTeacher = _personalService.Update(id, teacherDto);
             if (updatedTeacher == null)
                 return NotFound("Professor não encontrado.");
 
@@ -90,11 +92,11 @@ public class TeacherController : ControllerBase
 
     // DELETE: api/teacher/{id}
     [HttpDelete("{id}")]
-    public IActionResult DeleteTeacher(long id)
+    public IActionResult DeletePersonal(long id)
     {
         try
         {
-            _teacherService.Delete(id);
+            _personalService.Delete(id);
             return NoContent();
         }
         catch (KeyNotFoundException)

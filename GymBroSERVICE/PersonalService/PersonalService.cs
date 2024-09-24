@@ -125,6 +125,9 @@ namespace GymBroSERVICE.PersonalService
 
         public void Delete(long id)
         {
+            if(id == IdDousuariodarequisição)
+            {
+
             var personal = _repository.FindByID(id);
             if (personal == null)
                 throw new KeyNotFoundException("Professor não encontrado.");
@@ -134,6 +137,8 @@ namespace GymBroSERVICE.PersonalService
 
             _repository.Delete(id);
             _UserRepository.Delete(personal.UserId);
+            }
+            throw new UnauthorizedAccessException();
         }
     }
 }

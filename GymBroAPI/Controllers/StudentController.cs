@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using GymBroSERVICE.StudentService;
 using GymBroSERVICE.StudentService.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GymBroAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "STUDENT")]
     [ApiController]
     public class StudentController : ControllerBase
     {
