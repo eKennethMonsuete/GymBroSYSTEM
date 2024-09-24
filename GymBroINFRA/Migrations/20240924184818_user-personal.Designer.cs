@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240920191533_Relacao_Measure_Student")]
-    partial class Relacao_Measure_Student
+    [Migration("20240924184818_user-personal")]
+    partial class userpersonal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(6443));
+                        .HasDefaultValue(new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(9528));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -107,7 +107,13 @@ namespace GymBroINFRA.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Personal", (string)null);
                 });
@@ -123,7 +129,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(2076));
+                        .HasDefaultValue(new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(6941));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -159,6 +165,30 @@ namespace GymBroINFRA.Migrations
                     b.ToTable("Student", (string)null);
                 });
 
+            modelBuilder.Entity("GymBroINFRA.Entity.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActived")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User", (string)null);
+                });
+
             modelBuilder.Entity("GymBroINFRA.Entity.Measures", b =>
                 {
                     b.HasOne("GymBroINFRA.Entity.Student", "Student")
@@ -168,6 +198,17 @@ namespace GymBroINFRA.Migrations
                         .IsRequired();
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("GymBroINFRA.Entity.Personal", b =>
+                {
+                    b.HasOne("GymBroINFRA.Entity.User", "User")
+                        .WithOne()
+                        .HasForeignKey("GymBroINFRA.Entity.Personal", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GymBroINFRA.Entity.Student", b =>

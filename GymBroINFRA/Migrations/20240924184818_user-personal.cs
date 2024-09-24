@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymBroINFRA.Migrations
 {
     /// <inheritdoc />
-    public partial class Relacao_Measure_Student : Migration
+    public partial class userpersonal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,38 +16,39 @@ namespace GymBroINFRA.Migrations
                 table: "Student",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(2076),
+                defaultValue: new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(6941),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 16, 11, 10, 509, DateTimeKind.Local).AddTicks(4131));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(7438));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "Personal",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(6443),
+                defaultValue: new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(9528),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 16, 11, 10, 509, DateTimeKind.Local).AddTicks(7430));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(9875));
 
             migrationBuilder.AddColumn<long>(
-                name: "StudentId",
-                table: "Measures",
+                name: "UserId",
+                table: "Personal",
                 type: "bigint",
                 nullable: false,
                 defaultValue: 0L);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Measures_StudentId",
-                table: "Measures",
-                column: "StudentId");
+                name: "IX_Personal_UserId",
+                table: "Personal",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Measures_Student_StudentId",
-                table: "Measures",
-                column: "StudentId",
-                principalTable: "Student",
+                name: "FK_Personal_User_UserId",
+                table: "Personal",
+                column: "UserId",
+                principalTable: "User",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -56,36 +57,36 @@ namespace GymBroINFRA.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Measures_Student_StudentId",
-                table: "Measures");
+                name: "FK_Personal_User_UserId",
+                table: "Personal");
 
             migrationBuilder.DropIndex(
-                name: "IX_Measures_StudentId",
-                table: "Measures");
+                name: "IX_Personal_UserId",
+                table: "Personal");
 
             migrationBuilder.DropColumn(
-                name: "StudentId",
-                table: "Measures");
+                name: "UserId",
+                table: "Personal");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "Student",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 16, 11, 10, 509, DateTimeKind.Local).AddTicks(4131),
+                defaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(7438),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(2076));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(6941));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "Personal",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 16, 11, 10, 509, DateTimeKind.Local).AddTicks(7430),
+                defaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(9875),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 16, 15, 32, 927, DateTimeKind.Local).AddTicks(6443));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 48, 18, 634, DateTimeKind.Local).AddTicks(9528));
         }
     }
 }

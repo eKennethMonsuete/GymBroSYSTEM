@@ -7,43 +7,46 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymBroINFRA.Migrations
 {
     /// <inheritdoc />
-    public partial class tabela_student : Migration
+    public partial class tabelas_sem_herança : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
+                table: "Student",
+                type: "datetime",
+                nullable: false,
+                defaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(7438),
+                oldClrType: typeof(DateTime),
+                oldType: "datetime",
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 8, 30, 347, DateTimeKind.Local).AddTicks(9487));
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "CreatedAt",
                 table: "Personal",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 15, 51, 2, 615, DateTimeKind.Local).AddTicks(2388),
+                defaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(9875),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 15, 40, 31, 794, DateTimeKind.Local).AddTicks(6653));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 8, 30, 348, DateTimeKind.Local).AddTicks(2678));
 
             migrationBuilder.CreateTable(
-                name: "Student",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Phone = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 20, 15, 51, 2, 615, DateTimeKind.Local).AddTicks(393)),
                     IsActived = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Student", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -52,17 +55,27 @@ namespace GymBroINFRA.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Student");
+                name: "User");
+
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "CreatedAt",
+                table: "Student",
+                type: "datetime",
+                nullable: false,
+                defaultValue: new DateTime(2024, 9, 24, 15, 8, 30, 347, DateTimeKind.Local).AddTicks(9487),
+                oldClrType: typeof(DateTime),
+                oldType: "datetime",
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(7438));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreatedAt",
                 table: "Personal",
                 type: "datetime",
                 nullable: false,
-                defaultValue: new DateTime(2024, 9, 20, 15, 40, 31, 794, DateTimeKind.Local).AddTicks(6653),
+                defaultValue: new DateTime(2024, 9, 24, 15, 8, 30, 348, DateTimeKind.Local).AddTicks(2678),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime",
-                oldDefaultValue: new DateTime(2024, 9, 20, 15, 51, 2, 615, DateTimeKind.Local).AddTicks(2388));
+                oldDefaultValue: new DateTime(2024, 9, 24, 15, 39, 20, 128, DateTimeKind.Local).AddTicks(9875));
         }
     }
 }

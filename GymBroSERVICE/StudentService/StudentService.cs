@@ -41,10 +41,12 @@ namespace GymBroSERVICE.StudentService
                 Email = student.Email,
                 Phone = student.Phone,
 
-                Personal = student.Personal != null ? new PersonalListAllResponseDTO
+                Personal = student.Personal != null ? new PersonalResponseToStudentDTO
                 {
                     Name = student.Personal.Name,
+                    Email = student.Personal.Email,
                     Phone = student.Personal.Phone
+                    
                    
                 } : null,
 

@@ -91,9 +91,8 @@ namespace GymBroSERVICE.UserService
             }
             var user = new User()
             {
-                Name = userInput.Name,
+                
                 Email = userInput.Email,
-                LastName = userInput.LastName,
                 Password = userInput.Password,
             };
             var result = _repository.Create(user);
@@ -132,9 +131,9 @@ namespace GymBroSERVICE.UserService
             }
 
             // Atualiza as propriedades do usuário existente com os valores do DTO
-            existingUser.Name = userInputUpdateDTO.Name;
+            
             existingUser.Email = userInputUpdateDTO.Email;
-            existingUser.LastName = userInputUpdateDTO.LastName;
+            
             existingUser.Password = userInputUpdateDTO.Password;
 
             // Atualiza o usuário no repositório
@@ -149,9 +148,9 @@ namespace GymBroSERVICE.UserService
             var updatedUserDTO = new UserResponseDTO
             {
                 Id = existingUser.Id,
-                Name = updatedUser.Name,
+                
                 Email = updatedUser.Email,
-                LastName = updatedUser.LastName,
+                
                 Password = updatedUser.Password
             };
 

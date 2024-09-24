@@ -20,6 +20,9 @@ namespace GymBroINFRA.Context
         public DbSet<Personal> Personal
         {
             get; set;
+        } public DbSet<User> Users
+        {
+            get; set;
         }
 
        
@@ -30,7 +33,7 @@ namespace GymBroINFRA.Context
             modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new PersonalConfiguration());
             modelBuilder.ApplyConfiguration(new MeasuresConfiguration());
-            //modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

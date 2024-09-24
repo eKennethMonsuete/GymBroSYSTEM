@@ -20,6 +20,7 @@ namespace GymBroINFRA.config
             builder.Property(x => x.LastName);
             builder.Property(x => x.Phone);
             builder.Property(x => x.IsActived);
+            builder.Property(x => x.UserId);
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
@@ -29,6 +30,8 @@ namespace GymBroINFRA.config
             builder.HasMany(p => p.Students).
                 WithOne(e => e.Personal)
                 .HasForeignKey(e => e.PersonalId);
+
+            builder.HasOne(p => p.User).WithOne().HasForeignKey<Personal>(p => p.UserId);
 
 
             

@@ -35,7 +35,7 @@ namespace GymBroSERVICE.StudentService.DTO
 
 
 
-        public PersonalListAllResponseDTO Personal
+        public PersonalResponseToStudentDTO Personal
         {
             get; set;
         }
