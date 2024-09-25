@@ -29,6 +29,7 @@ namespace GymBroSERVICE.PersonalService
                 Email = teacher.User.Email,
                 LastName = teacher.LastName,
                 Phone = teacher.Phone,
+                CreatedAt = teacher.CreatedAt.ToString("dd/MM/yyyy")
             }).ToList();
         }
 
@@ -46,11 +47,11 @@ namespace GymBroSERVICE.PersonalService
                 Email = personal.User.Email,
                 LastName = personal.LastName,
                 Phone = personal.Phone,
+                CreatedAt = personal.CreatedAt.ToString("dd/MM/yyyy"),
                 Students = personal.Students?.Select(student => new StudentFindAllResponseDTO
                 {
                     Id = student.Id,
                     Name = student.Name,
-                    Email = student.Email,
                     LastName = student.LastName,
                     Phone = student.Phone,
                 }).ToList()
@@ -97,7 +98,7 @@ namespace GymBroSERVICE.PersonalService
 
         public PersonalListAllResponseDTO Update(long id, PersonalUpdateDTO personalDto)
         {
-            //var existingPersonal = _repository.FindByID(id);
+            
 
             var personal = _repository.Where(e => e.Id == id).Include(e => e.User).FirstOrDefault();
 
@@ -125,8 +126,7 @@ namespace GymBroSERVICE.PersonalService
 
         public void Delete(long id)
         {
-            if(id == IdDousuariodarequisição)
-            {
+            
 
             var personal = _repository.FindByID(id);
             if (personal == null)
@@ -138,7 +138,7 @@ namespace GymBroSERVICE.PersonalService
             _repository.Delete(id);
             _UserRepository.Delete(personal.UserId);
             }
-            throw new UnauthorizedAccessException();
-        }
+            
+        
     }
 }

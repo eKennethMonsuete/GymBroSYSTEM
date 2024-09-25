@@ -31,6 +31,11 @@ namespace GymBroSERVICE.StudentService.DTO
         {
             get; set;
         }
+
+        public string CreatedAt
+        {
+                get; set;
+        }
        
        
 

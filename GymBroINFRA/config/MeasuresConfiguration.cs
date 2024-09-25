@@ -22,6 +22,11 @@ namespace GymBroINFRA.config
             builder.Property(x => x.RightCalf);
             builder.Property(x => x.LeftCalf);
 
+            builder.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(DateTime.Now)
+                .IsRequired(true);
+
             builder.Property(s => s.StudentId)
                .IsRequired(true);
 

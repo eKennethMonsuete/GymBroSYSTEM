@@ -3,6 +3,7 @@ using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService.DTO;
 using GymBroSERVICE.PersonalService.DTO;
 using GymBroSERVICE.StudentService.DTO;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace GymBroSERVICE.StudentService
@@ -26,8 +27,9 @@ namespace GymBroSERVICE.StudentService
                 Id = student.Id,
                 Name = student.Name,
                 LastName = student.LastName,
-                Email = student.Email,
-                Phone = student.Phone
+                Email = student.User.Email,
+                Phone = student.Phone,
+                CreatedAt = student.CreatedAt.ToString("dd/MM/yyyy")
             }).ToList();                               
         }
 
@@ -40,18 +42,11 @@ namespace GymBroSERVICE.StudentService
                 Id = student.Id,
                 Name = student.Name,
                 LastName = student.LastName,
-                Email = student.Email,
+                Email = student.User.Email,
                 Phone = student.Phone,
-
-                Personal = student.Personal != null ? new PersonalResponseToStudentDTO
-                {
-                    Name = student.Personal.Name,
-                    //Email = student.Personal.Email,
-                    Phone = student.Personal.Phone
-                    
-                   
-                } : null,
-
+                CreatedAt = student.CreatedAt.ToString("dd/MM/yyyy"),
+               
+              
                 Measures = student.Measures?.Select(measure => new MeasuresResponseDTO
                 {                 
                     Weight = measure.Weight,
@@ -69,6 +64,10 @@ namespace GymBroSERVICE.StudentService
 
         public StudentFindAllResponseDTO Create(StudentCreateDTO studentDto)
         {
+            bool exists = _UserRepository.Where(e => e.Email.ToLower() == studentDto.Email.ToLower()).Any();
+
+            if (exists) throw new Exception("Usário já cadastrado");
+
             var user = new User
             {
                 Email = studentDto.Email,
@@ -82,13 +81,11 @@ namespace GymBroSERVICE.StudentService
             {
                 Name = studentDto.Name,
                 LastName = studentDto.LastName,
-                Email = studentDto.Email,
-                Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
                 Phone = studentDto.Phone,
                 PersonalId = studentDto.PersonalId,
-                //UserId = userResult.Id,
+                UserId = userResult.Id,
 
-                // Adicione lógica para workout caso exista
+                
             };
 
             var createdStudent = _repository.Create(student);
@@ -102,36 +99,38 @@ namespace GymBroSERVICE.StudentService
                 Id = createdStudent.Id,
                 Name = createdStudent.Name,
                 LastName = createdStudent.LastName,
-                Email = createdStudent.Email,
+                Email = userResult.Email,
                 Phone = createdStudent.Phone,
             };
         }
 
         public StudentFindByIdResponseDTO Update(long id, StudentCreateDTO studentDto)
         {
-            var existingStudent = _repository.FindByID(id);
-            if (existingStudent == null) throw new KeyNotFoundException("Student not found.");
 
-            existingStudent.Name = studentDto.Name;
-            existingStudent.LastName = studentDto.LastName;
-            existingStudent.Email = studentDto.Email;
-            existingStudent.Phone = studentDto.Phone;
-            existingStudent.PersonalId = studentDto.PersonalId;
-            if (!string.IsNullOrEmpty(studentDto.Password))
+            var student = _repository.Where(e => e.Id == id).Include(e => e.User).FirstOrDefault();
+
+            if (student == null)
             {
-               if (!BCrypt.Net.BCrypt.EnhancedVerify(studentDto.Password, existingStudent.Password))
-               {
-                    
-                    existingStudent.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13);
-               }
+                throw new KeyNotFoundException("Personal não encontrado.");
             }
-            else
-            {
-                throw new ArgumentException("A senha não pode ser nula ou vazia.");
-            }
+
+
+
+            student.Name = studentDto.Name;
+            student.LastName = studentDto.LastName;
+            student.Phone = studentDto.Phone;
+            student.PersonalId = studentDto.PersonalId;                                                
            
-            _repository.Update(existingStudent);
-            return FindById(id);
+          var result =  _repository.Update(student);
+          var userResult = _UserRepository.Update(student.User);
+            return new StudentFindByIdResponseDTO
+            {
+                Id = result.Id,
+                Name = result.Name,
+                LastName = result.LastName,
+                Phone = result.Phone,
+                Email = student.User.Email
+            };
         }
 
         public void Delete(long id)
@@ -139,7 +138,12 @@ namespace GymBroSERVICE.StudentService
             var student = _repository.FindByID(id);
             if (student == null) throw new KeyNotFoundException("Student not found.");
 
+            student.User.StudentId = null;
+            _UserRepository.Update(student.User);
+                
+
             _repository.Delete(id);
+            _UserRepository.Delete(student.UserId);
         }
     }
 }

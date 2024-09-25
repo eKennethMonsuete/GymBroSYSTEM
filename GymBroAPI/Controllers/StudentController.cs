@@ -41,16 +41,11 @@ namespace GymBroAPI.Controllers
         }
 
         // POST: api/student
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult CreateStudent([FromBody] StudentCreateDTO studentDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var createdStudent = _studentService.Create(studentDto);
-            return CreatedAtAction(nameof(GetStudentById), new { id = createdStudent.Id }, createdStudent);
+               return  Ok(_studentService.Create(studentDto)); 
         }
 
         // PUT: api/student/{id}

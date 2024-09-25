@@ -33,12 +33,12 @@ namespace GymBroSERVICE.StudentService.DTO
             get; set;
         }
 
-
-
-        public PersonalResponseToStudentDTO Personal
+        public string CreatedAt
         {
             get; set;
         }
+
+       
 
 
         public ICollection<MeasuresResponseDTO>? Measures

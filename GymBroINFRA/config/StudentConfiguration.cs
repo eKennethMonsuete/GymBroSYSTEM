@@ -19,8 +19,7 @@ namespace GymBroINFRA.config
                 .HasMaxLength(100)
                 .IsRequired(true);
 
-            builder.Property(x => x.Email);
-            builder.Property(x => x.Password);
+            
             builder.Property(x => x.LastName);
             builder.Property(x => x.Phone);
             builder.Property(x => x.IsActived);

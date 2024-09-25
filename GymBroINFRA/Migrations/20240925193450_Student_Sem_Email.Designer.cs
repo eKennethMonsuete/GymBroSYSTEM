@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240924210657_remove_email_field_personal")]
-    partial class remove_email_field_personal
+    [Migration("20240925193450_Student_Sem_Email")]
+    partial class Student_Sem_Email
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,11 @@ namespace GymBroINFRA.Migrations
                         .HasColumnType("bigint");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 409, DateTimeKind.Local).AddTicks(5827));
 
                     b.Property<double>("Hips")
                         .HasColumnType("double");
@@ -81,7 +86,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 24, 18, 6, 56, 867, DateTimeKind.Local).AddTicks(5604));
+                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 408, DateTimeKind.Local).AddTicks(1457));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -121,11 +126,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 24, 18, 6, 56, 866, DateTimeKind.Local).AddTicks(8226));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 406, DateTimeKind.Local).AddTicks(6144));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -138,10 +139,6 @@ namespace GymBroINFRA.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<long?>("PersonalId")
                         .HasColumnType("bigint");

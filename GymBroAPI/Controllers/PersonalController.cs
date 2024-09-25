@@ -16,6 +16,7 @@ public class PersonalController : ControllerBase
     }
 
     // GET: api/teacher
+    
     [HttpGet]
     public IActionResult GetAllPersonals()
     {
