@@ -1,4 +1,5 @@
-﻿using GymBroSERVICE.StudentService.DTO;
+﻿using GymBroSERVICE.StudentlService.DTO;
+using GymBroSERVICE.StudentService.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace GymBroSERVICE.StudentService
     {
         List<StudentFindAllResponseDTO> FindAll();
         StudentFindByIdResponseDTO FindById(long id);
-        StudentFindAllResponseDTO Create(StudentCreateDTO teacherDto);
-        StudentFindByIdResponseDTO Update(long id, StudentCreateDTO teacherDto);
+        StudentFindAllResponseDTO Create(StudentCreateDTO studentDto);
+        StudentFindByIdResponseDTO Update(long id, StudentUpdateDTO studentDto);
         void Delete(long id);
     }
 }

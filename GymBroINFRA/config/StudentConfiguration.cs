@@ -36,7 +36,8 @@ namespace GymBroINFRA.config
 
             builder.HasOne(student => student.Personal)
                 .WithMany(personal => personal.Students)
-                .HasForeignKey(student => student.PersonalId);
+                .HasForeignKey(student => student.PersonalId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(p => p.Measures).
                WithOne(e => e.Student)

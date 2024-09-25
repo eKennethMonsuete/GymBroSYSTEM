@@ -2,6 +2,7 @@
 using GymBroSERVICE.StudentService;
 using GymBroSERVICE.StudentService.DTO;
 using Microsoft.AspNetCore.Authorization;
+using GymBroSERVICE.StudentlService.DTO;
 
 namespace GymBroAPI.Controllers
 {
@@ -50,7 +51,7 @@ namespace GymBroAPI.Controllers
 
         // PUT: api/student/{id}
         [HttpPut("{id}")]
-        public IActionResult UpdateStudent(long id, [FromBody] StudentCreateDTO studentDto)
+        public IActionResult UpdateStudent(long id, [FromBody] StudentUpdateDTO studentDto)
         {
             if (!ModelState.IsValid)
             {

@@ -38,6 +38,11 @@ namespace GymBroSERVICE.StudentService.DTO
             get; set;
         }
 
+        public long? PesonalId
+        {
+            get; set;
+        }
+
        
 
 

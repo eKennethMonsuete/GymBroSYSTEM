@@ -43,7 +43,7 @@ namespace GymBroINFRA.Entity;
     {
         get; set;
     }
-    public virtual Personal Personal
+    public virtual Personal? Personal
     {
         get; set;
     }

@@ -2,6 +2,7 @@
 using GymBroINFRA.Repository;
 using GymBroSERVICE.MeasuresService.DTO;
 using GymBroSERVICE.PersonalService.DTO;
+using GymBroSERVICE.StudentlService.DTO;
 using GymBroSERVICE.StudentService.DTO;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +45,9 @@ namespace GymBroSERVICE.StudentService
                 LastName = student.LastName,
                 Email = student.User.Email,
                 Phone = student.Phone,
+                PesonalId = student.PersonalId.HasValue ? student.PersonalId.Value : (long?)null,
                 CreatedAt = student.CreatedAt.ToString("dd/MM/yyyy"),
+                
                
               
                 Measures = student.Measures?.Select(measure => new MeasuresResponseDTO
@@ -70,12 +73,11 @@ namespace GymBroSERVICE.StudentService
 
             var user = new User
             {
-                Email = studentDto.Email,
+                Email = studentDto.Email.ToLower(),
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
             };
 
             var userResult = _UserRepository.Create(user);
-
 
             var student = new Student
             {
@@ -84,8 +86,7 @@ namespace GymBroSERVICE.StudentService
                 Phone = studentDto.Phone,
                 PersonalId = studentDto.PersonalId,
                 UserId = userResult.Id,
-
-                
+               
             };
 
             var createdStudent = _repository.Create(student);
@@ -104,25 +105,26 @@ namespace GymBroSERVICE.StudentService
             };
         }
 
-        public StudentFindByIdResponseDTO Update(long id, StudentCreateDTO studentDto)
+        public StudentFindByIdResponseDTO Update(long id, StudentUpdateDTO studentDto)
         {
 
             var student = _repository.Where(e => e.Id == id).Include(e => e.User).FirstOrDefault();
 
             if (student == null)
             {
-                throw new KeyNotFoundException("Personal não encontrado.");
+                throw new KeyNotFoundException("Student não encontrado.");
             }
-
 
 
             student.Name = studentDto.Name;
             student.LastName = studentDto.LastName;
             student.Phone = studentDto.Phone;
-            student.PersonalId = studentDto.PersonalId;                                                
+            student.PersonalId = studentDto.PersonalId;
+            student.User.Email = studentDto.Email;
            
           var result =  _repository.Update(student);
           var userResult = _UserRepository.Update(student.User);
+
             return new StudentFindByIdResponseDTO
             {
                 Id = result.Id,
