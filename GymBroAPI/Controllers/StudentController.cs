@@ -7,7 +7,7 @@ using GymBroSERVICE.StudentlService.DTO;
 namespace GymBroAPI.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = "STUDENT")]
+    //[Authorize(Roles = "STUDENT")]
     [ApiController]
     public class StudentController : ControllerBase
     {
@@ -20,9 +20,9 @@ namespace GymBroAPI.Controllers
 
         // GET: api/student
         [HttpGet]
-        public IActionResult GetAllStudents()
+        public async Task<IActionResult> GetAllStudents()
         {
-            var students = _studentService.FindAll();
+            var students = await _studentService.FindAll();
             return Ok(students);
         }
 

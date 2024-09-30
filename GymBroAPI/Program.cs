@@ -59,7 +59,7 @@ internal class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
 
-        builder.Services.AddScoped<IMeasuresService, MeasuresService>();
+       // builder.Services.AddScoped<IMeasuresService, MeasuresService>();
         builder.Services.AddScoped<IPersonalService, PersonalService>();
         builder.Services.AddScoped<IStudentService, StudentService>();
         builder.Services.AddScoped<IUserService, UserServices>();

@@ -24,6 +24,11 @@ namespace GymBroINFRA.Repository
             return dbSet.ToList();
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
+
         public T FindByID(long id)
         {
             var entity = dbSet.Find(id);
@@ -59,6 +64,12 @@ namespace GymBroINFRA.Repository
 
                 throw;
             }
+        }
+
+        public async Task<T> CreateAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
+            return entity;
         }
 
         public void Delete(long id)
@@ -124,6 +135,16 @@ namespace GymBroINFRA.Repository
                 }
             }
             return null;
+        }
+        public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> criteria, string[] includes = null)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            if (includes != null)
+                foreach (var include in includes)
+                    query = query.Include(include);
+
+            return await query.Where(criteria).ToListAsync();
         }
     }
 }

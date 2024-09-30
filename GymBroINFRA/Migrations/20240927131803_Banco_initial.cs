@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymBroINFRA.Migrations
 {
     /// <inheritdoc />
-    public partial class Banco_Inicial : Migration
+    public partial class Banco_initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,7 @@ namespace GymBroINFRA.Migrations
                     LeftQuadriceps = table.Column<double>(type: "double", nullable: false),
                     RightCalf = table.Column<double>(type: "double", nullable: false),
                     LeftCalf = table.Column<double>(type: "double", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 25, 15, 26, 36, 64, DateTimeKind.Local).AddTicks(3735)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 920, DateTimeKind.Local).AddTicks(2542)),
                     StudentId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace GymBroINFRA.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 25, 15, 26, 36, 61, DateTimeKind.Local).AddTicks(1225)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 919, DateTimeKind.Local).AddTicks(2077)),
                     IsActived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -68,15 +68,11 @@ namespace GymBroINFRA.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     LastName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 25, 15, 26, 36, 56, DateTimeKind.Local).AddTicks(8733)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 918, DateTimeKind.Local).AddTicks(384)),
                     IsActived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     PersonalId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: false)
@@ -88,7 +84,8 @@ namespace GymBroINFRA.Migrations
                         name: "FK_Student_Personal_PersonalId",
                         column: x => x.PersonalId,
                         principalTable: "Personal",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

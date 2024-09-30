@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240925193450_Student_Sem_Email")]
-    partial class Student_Sem_Email
+    [Migration("20240927131803_Banco_initial")]
+    partial class Banco_initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 409, DateTimeKind.Local).AddTicks(5827));
+                        .HasDefaultValue(new DateTime(2024, 9, 27, 10, 18, 2, 920, DateTimeKind.Local).AddTicks(2542));
 
                     b.Property<double>("Hips")
                         .HasColumnType("double");
@@ -86,7 +86,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 408, DateTimeKind.Local).AddTicks(1457));
+                        .HasDefaultValue(new DateTime(2024, 9, 27, 10, 18, 2, 919, DateTimeKind.Local).AddTicks(2077));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -126,7 +126,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 25, 16, 34, 50, 406, DateTimeKind.Local).AddTicks(6144));
+                        .HasDefaultValue(new DateTime(2024, 9, 27, 10, 18, 2, 918, DateTimeKind.Local).AddTicks(384));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -222,7 +222,8 @@ namespace GymBroINFRA.Migrations
                 {
                     b.HasOne("GymBroINFRA.Entity.Personal", "Personal")
                         .WithMany("Students")
-                        .HasForeignKey("PersonalId");
+                        .HasForeignKey("PersonalId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("GymBroINFRA.Entity.User", "User")
                         .WithOne()

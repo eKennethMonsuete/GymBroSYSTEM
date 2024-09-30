@@ -95,20 +95,21 @@ public class PersonalController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletePersonal(long id)
     {
-        try
-        {
-            _personalService.Delete(id);
-            return NoContent();
-        }
-        catch (KeyNotFoundException)
-        {
-            return NotFound("Professor não encontrado.");
-        }
-        catch (Exception ex)
-        {
-            // Logging pode ser adicionado aqui
-            return StatusCode(500, "Erro ao deletar professor: " + ex.Message);
-        }
+        return null;
+        //try
+        //{
+        //    _personalService.Delete(id);
+        //    return NoContent();
+        //}
+        //catch (KeyNotFoundException)
+        //{
+        //    return NotFound("Professor não encontrado.");
+        //}
+        //catch (Exception ex)
+        //{
+        //    // Logging pode ser adicionado aqui
+        //    return StatusCode(500, "Erro ao deletar professor: " + ex.Message);
+        //}
     }
 }
 

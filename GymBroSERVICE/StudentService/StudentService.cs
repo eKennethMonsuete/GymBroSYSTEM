@@ -20,9 +20,9 @@ namespace GymBroSERVICE.StudentService
             _UserRepository = userRepository;
         }
 
-        public List<StudentFindAllResponseDTO> FindAll()
+        public async Task<List<StudentFindAllResponseDTO>> FindAll()
         {
-            var students = _repository.FindAll();
+            var students = await _repository.GetAllAsync();
             return students.Select(student => new StudentFindAllResponseDTO
             {
                 Id = student.Id,
@@ -65,11 +65,11 @@ namespace GymBroSERVICE.StudentService
             
         }
 
-        public StudentFindAllResponseDTO Create(StudentCreateDTO studentDto)
+        public async Task<StudentFindAllResponseDTO> Create(StudentCreateDTO studentDto)
         {
-            bool exists = _UserRepository.Where(e => e.Email.ToLower() == studentDto.Email.ToLower()).Any();
+            var exists = await _UserRepository.FindAllAsync(e => e.Email.ToLower() == studentDto.Email.ToLower());
 
-            if (exists) throw new Exception("Usário já cadastrado");
+            if (exists.Any()) throw new Exception("Usário já cadastrado");
 
             var user = new User
             {
@@ -77,7 +77,7 @@ namespace GymBroSERVICE.StudentService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(studentDto.Password, 13),
             };
 
-            var userResult = _UserRepository.Create(user);
+            var userResult = await _UserRepository.CreateAsync(user);
 
             var student = new Student
             {
@@ -89,7 +89,7 @@ namespace GymBroSERVICE.StudentService
                
             };
 
-            var createdStudent = _repository.Create(student);
+            var createdStudent = await _repository.CreateAsync(student);
 
             user.StudentId = student.Id;
             _UserRepository.Update(user);
