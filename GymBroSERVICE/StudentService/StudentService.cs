@@ -67,9 +67,10 @@ namespace GymBroSERVICE.StudentService
 
         public async Task<StudentFindAllResponseDTO> Create(StudentCreateDTO studentDto)
         {
-            var exists = await _UserRepository.FindAllAsync(e => e.Email.ToLower() == studentDto.Email.ToLower());
+           var exists = await _UserRepository.FindAllAsync(e => e.Email.ToLower() == studentDto.Email.ToLower());
 
             if (exists.Any()) throw new Exception("Usário já cadastrado");
+            
 
             var user = new User
             {
@@ -78,6 +79,11 @@ namespace GymBroSERVICE.StudentService
             };
 
             var userResult = await _UserRepository.CreateAsync(user);
+
+            if (userResult.Id == 0)
+            {
+                throw new Exception("Falha ao criar o usuário id tá 0.");
+            }
 
             var student = new Student
             {
@@ -92,7 +98,14 @@ namespace GymBroSERVICE.StudentService
             var createdStudent = await _repository.CreateAsync(student);
 
             user.StudentId = student.Id;
-            _UserRepository.Update(user);
+
+            var userToUpdate =  _UserRepository.FindByID(userResult.Id);
+
+            if (userToUpdate == null)
+            {
+                throw new Exception("Usuário não encontrado para atualizar o StudentId.");
+            }
+            _UserRepository.Update(userToUpdate);
 
 
             return new StudentFindAllResponseDTO
@@ -102,6 +115,7 @@ namespace GymBroSERVICE.StudentService
                 LastName = createdStudent.LastName,
                 Email = userResult.Email,
                 Phone = createdStudent.Phone,
+                CreatedAt = student.CreatedAt.ToString("dd/MM/yyyy")
             };
         }
 

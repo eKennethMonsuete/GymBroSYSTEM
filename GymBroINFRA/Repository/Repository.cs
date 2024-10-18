@@ -69,6 +69,12 @@ namespace GymBroINFRA.Repository
         public async Task<T> CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+           var result = await  _context.SaveChangesAsync();
+            if (result == 0)
+            {
+                throw new Exception("Falha ao salvar a entidade no banco de dados.");
+            }
+
             return entity;
         }
 

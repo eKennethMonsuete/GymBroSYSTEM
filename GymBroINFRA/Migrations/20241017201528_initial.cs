@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymBroINFRA.Migrations
 {
     /// <inheritdoc />
-    public partial class Banco_initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,7 @@ namespace GymBroINFRA.Migrations
                     LeftQuadriceps = table.Column<double>(type: "double", nullable: false),
                     RightCalf = table.Column<double>(type: "double", nullable: false),
                     LeftCalf = table.Column<double>(type: "double", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 920, DateTimeKind.Local).AddTicks(2542)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 10, 17, 17, 15, 24, 733, DateTimeKind.Local).AddTicks(1040)),
                     StudentId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace GymBroINFRA.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 919, DateTimeKind.Local).AddTicks(2077)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 10, 17, 17, 15, 24, 731, DateTimeKind.Local).AddTicks(4533)),
                     IsActived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
@@ -72,7 +72,7 @@ namespace GymBroINFRA.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 9, 27, 10, 18, 2, 918, DateTimeKind.Local).AddTicks(384)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 10, 17, 17, 15, 24, 729, DateTimeKind.Local).AddTicks(5573)),
                     IsActived = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     PersonalId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<long>(type: "bigint", nullable: false)

@@ -36,7 +36,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 30, 15, 27, 49, 394, DateTimeKind.Local).AddTicks(6825));
+                        .HasDefaultValue(new DateTime(2024, 10, 17, 17, 15, 24, 733, DateTimeKind.Local).AddTicks(1040));
 
                     b.Property<double>("Hips")
                         .HasColumnType("double");
@@ -83,7 +83,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 30, 15, 27, 49, 393, DateTimeKind.Local).AddTicks(6984));
+                        .HasDefaultValue(new DateTime(2024, 10, 17, 17, 15, 24, 731, DateTimeKind.Local).AddTicks(4533));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -123,7 +123,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 9, 30, 15, 27, 49, 392, DateTimeKind.Local).AddTicks(6187));
+                        .HasDefaultValue(new DateTime(2024, 10, 17, 17, 15, 24, 729, DateTimeKind.Local).AddTicks(5573));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");

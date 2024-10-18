@@ -43,6 +43,8 @@ namespace GymBroSERVICE.StudentService.DTO
             get; set;
         }
 
+        
+
        
 
 

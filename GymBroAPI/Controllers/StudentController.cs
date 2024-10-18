@@ -40,13 +40,15 @@ namespace GymBroAPI.Controllers
                 return NotFound("Student not found.");
             }
         }
-
+// [ProducesResponseType(typeof(StudentFindAllResponseDTO), statusCode:200)]
         // POST: api/student
-        [AllowAnonymous]
+       // [AllowAnonymous]
+
         [HttpPost]
-        public IActionResult CreateStudent([FromBody] StudentCreateDTO studentDto)
+        public async Task<IActionResult> CreateStudent([FromBody] StudentCreateDTO studentDto)
         {
-               return  Ok(_studentService.Create(studentDto)); 
+            var result = await _studentService.Create(studentDto);
+            return Ok(result);
         }
 
         // PUT: api/student/{id}

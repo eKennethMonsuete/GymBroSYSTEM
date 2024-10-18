@@ -34,18 +34,18 @@ namespace GymBroSERVICE.StudentService.DTO
 
         public string CreatedAt
         {
-                get; set;
+            get; set;
         }
-       
-       
 
-        
+
+
+
         //public PersonalListAllResponseDTO Teacher
         //{
         //    get; set;
         //}
 
-        
+
         //public ICollection<MeasuresResponseDTO>? Measures
         //{
         //    get; set;
