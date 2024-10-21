@@ -16,9 +16,9 @@ namespace GymBroAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllMeasures()
+        public async Task<IActionResult> GetAllMeasures()
         {
-            return Ok(_service.FindAll());
+            return Ok( await _service.FindAll());
         }
         [HttpGet("{id}")]
         public IActionResult GetOneMeasuresByID(long id)
@@ -27,7 +27,7 @@ namespace GymBroAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveMeasures([FromBody] MeasuresCreateInputDTO input) => Ok(_service.Create(input));
+        public async Task<IActionResult> SaveMeasures([FromBody] MeasuresCreateInputDTO input) => Ok( await _service.Create(input));
 
         [HttpPut("{id}")]
         public IActionResult UpdateMeasures(long id, [FromBody] MeasuresUpdateInputDTO input)

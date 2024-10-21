@@ -10,13 +10,13 @@ namespace GymBroSERVICE.PersonalService
     public interface IPersonalService
     {
 
-        List<PersonalListAllResponseDTO> FindAll();
+        Task<List<PersonalListAllResponseDTO>> FindAll();
 
 
         PersonalFindByIdResponse FindById(long id);
 
 
-        PersonalListAllResponseDTO Create(PersonalCreateDTO teacherDto);
+        Task<PersonalListAllResponseDTO> Create(PersonalCreateDTO teacherDto);
 
 
         PersonalListAllResponseDTO Update(long id, PersonalUpdateDTO teacherDto);

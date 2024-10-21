@@ -18,18 +18,12 @@ public class PersonalController : ControllerBase
     // GET: api/teacher
     
     [HttpGet]
-    public IActionResult GetAllPersonals()
+    public async Task<IActionResult> GetAllPersonals()
     {
-        try
-        {
-            var teachers = _personalService.FindAll();
+       
+            var teachers = await _personalService.FindAll();
             return Ok(teachers);
-        }
-        catch (Exception ex)
-        {
-            // Logging pode ser adicionado aqui
-            return StatusCode(500, "Erro ao buscar professores: " + ex.Message);
-        }
+        
     }
 
     // GET: api/teacher/{id}
@@ -58,10 +52,10 @@ public class PersonalController : ControllerBase
     // POST: api/teacher
     [AllowAnonymous]
     [HttpPost]
-    public IActionResult CreatePersonal([FromBody] PersonalCreateDTO teacherDto)
+    public async Task<IActionResult> CreatePersonal([FromBody] PersonalCreateDTO teacherDto)
     {
               
-          return Ok(_personalService.Create(teacherDto));
+          return Ok( await _personalService.Create(teacherDto));
        
     }
 
@@ -95,21 +89,21 @@ public class PersonalController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletePersonal(long id)
     {
-        return null;
-        //try
-        //{
-        //    _personalService.Delete(id);
-        //    return NoContent();
-        //}
-        //catch (KeyNotFoundException)
-        //{
-        //    return NotFound("Professor não encontrado.");
-        //}
-        //catch (Exception ex)
-        //{
-        //    // Logging pode ser adicionado aqui
-        //    return StatusCode(500, "Erro ao deletar professor: " + ex.Message);
-        //}
+       
+        try
+        {
+            _personalService.Delete(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound("Professor não encontrado.");
+        }
+        catch (Exception ex)
+        {
+            // Logging pode ser adicionado aqui
+            return StatusCode(500, "Erro ao deletar professor: " + ex.Message);
+        }
     }
 }
 

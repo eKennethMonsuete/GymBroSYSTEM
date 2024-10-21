@@ -65,6 +65,12 @@ namespace GymBroINFRA.Entity
             get; set;
         }
 
+        public string PreviousDate
+        {
+        
+        get; set; 
+        }
+
 
 
 

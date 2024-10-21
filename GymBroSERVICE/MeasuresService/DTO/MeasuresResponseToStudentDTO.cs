@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.MeasuresService.DTO
 {
-    public class MeasuresCreateInputDTO
+   public class MeasuresResponseToStudentDTO
     {
+
+
         public double Weight
         {
             get; set;
@@ -46,12 +48,12 @@ namespace GymBroSERVICE.MeasuresService.DTO
         {
             get; set;
         }
-
-        public long StudentId
+        public string PreviousDate
         {
             get; set;
         }
 
-        public string PreviousDate { get; set; }
-    }
+
+    }   
+
 }

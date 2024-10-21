@@ -21,6 +21,7 @@ namespace GymBroINFRA.config
             builder.Property(x => x.LeftQuadriceps);
             builder.Property(x => x.RightCalf);
             builder.Property(x => x.LeftCalf);
+            builder.Property(x => x.PreviousDate);
 
             builder.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")

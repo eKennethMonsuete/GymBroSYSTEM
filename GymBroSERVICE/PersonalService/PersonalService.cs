@@ -19,9 +19,9 @@ namespace GymBroSERVICE.PersonalService
 
         //DTOentrada - DTOSaida - Interface - SErvice
 
-        public List<PersonalListAllResponseDTO> FindAll()
+        public async Task<List<PersonalListAllResponseDTO>> FindAll()
         {
-            var personal = _repository.FindAll();
+            var personal = await _repository.GetAllAsync();
             return personal.Select(teacher => new PersonalListAllResponseDTO
             {
                 Id = teacher.Id,
@@ -59,11 +59,13 @@ namespace GymBroSERVICE.PersonalService
 
         }
 
-        public PersonalListAllResponseDTO Create(PersonalCreateDTO personalDto)
+        public  async Task<PersonalListAllResponseDTO> Create(PersonalCreateDTO personalDto)
         {
-            bool exists = _UserRepository.Where(e => e.Email.ToLower() == personalDto.Email.ToLower()).Any();
+            var exists = 
+                await _UserRepository.FindAllAsync
+                (e => e.Email.ToLower() == personalDto.Email.ToLower());
 
-            if (exists) throw new Exception("Usário já cadastrado");
+            if (exists.Any()) throw new Exception("Usário já cadastrado");
 
             var user = new User
             {
@@ -71,7 +73,7 @@ namespace GymBroSERVICE.PersonalService
                 Password = BCrypt.Net.BCrypt.EnhancedHashPassword(personalDto.Password, 13),
             };
 
-            var userResult = _UserRepository.Create(user);
+            var userResult = await _UserRepository.CreateAsync(user);
 
             var personal = new Personal
             {
@@ -81,18 +83,19 @@ namespace GymBroSERVICE.PersonalService
                 UserId = userResult.Id,
             };
 
-            var createdPersonal = _repository.Create(personal);
+            var createdPersonal = await _repository.CreateAsync(personal);
 
             user.PersonalId = personal.Id;
             _UserRepository.Update(user);
 
-            return new PersonalListAllResponseDTO
+           return new PersonalListAllResponseDTO
             {
                 Id = createdPersonal.Id,
                 Name = createdPersonal.Name,
                 Email = userResult.Email,
                 LastName = createdPersonal.LastName,
                 Phone = createdPersonal.Phone,
+                CreatedAt = createdPersonal.CreatedAt.ToString("dd/MM/yyyy")
             };
         }
 

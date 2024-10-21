@@ -13,10 +13,10 @@ namespace GymBroSERVICE.MeasuresService
         {
             _repository = repository;
         }
-        public List<MeasuresResponseDTO> FindAll()
+        public async  Task<List<MeasuresResponseDTO>> FindAll()
         {
             
-            var measuresEntities = _repository.FindAll();
+            var measuresEntities = await _repository.GetAllAsync();
 
             
             var measuresDTOs = measuresEntities.Select(measure => new MeasuresResponseDTO
@@ -30,6 +30,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
+                PreviousDate = measure.PreviousDate,
                 StudentId = measure.StudentId,
             }).ToList();
 
@@ -56,12 +57,13 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
+                PreviousDate = measure.PreviousDate,
                 StudentId = measure.StudentId
             };
 
             return responseDTO;
         }
-        public MeasuresResponseDTO Create(MeasuresCreateInputDTO measures)
+        public async Task<MeasuresResponseDTO> Create(MeasuresCreateInputDTO measures)
         {
 
             if (measures == null)
@@ -69,7 +71,7 @@ namespace GymBroSERVICE.MeasuresService
                 throw new ArgumentNullException( "As medidas não podem ser nulas.");
             }
 
-            
+            //possivelmente há chance de ter um problema aqui na previousDate
             var measure = new Measures
             {
                 Weight = measures.Weight,
@@ -80,6 +82,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
                 RightCalf = measures.RightCalf,
+                PreviousDate = measures.PreviousDate,
                 StudentId = measures.StudentId
 
             };
@@ -91,9 +94,10 @@ namespace GymBroSERVICE.MeasuresService
                 measure.LeftQuadriceps < 0 ||
                 measure.RightQuadriceps < 0 ||
                 measure.LeftCalf < 0 ||
-                measure.RightCalf < 0 )
+                measure.RightCalf < 0 ||
+                measure.PreviousDate  == null)
             {
-                throw new ArgumentException("As medidas não podem ser menores que zero.");
+                throw new ArgumentException("As medidas não podem ser menores que zero ou null.");
             }
             if(measures.StudentId != null)
                 {
@@ -113,7 +117,9 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measures.RightQuadriceps,
                 LeftCalf = measures.LeftCalf,
                 RightCalf = measures.RightCalf,
-                StudentId = measure.StudentId
+                PreviousDate = measure.PreviousDate,
+                StudentId = measure.StudentId,
+
 
 
             };

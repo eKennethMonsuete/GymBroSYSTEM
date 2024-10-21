@@ -9,11 +9,11 @@ namespace GymBroSERVICE.MeasuresService
 {
     public interface IMeasuresService
     {
-        MeasuresResponseDTO Create(MeasuresCreateInputDTO measures);
+        Task<MeasuresResponseDTO> Create(MeasuresCreateInputDTO measures);
 
         MeasuresResponseDTO FindByID(long id);
 
-        List<MeasuresResponseDTO> FindAll();
+        Task<List<MeasuresResponseDTO>> FindAll();
 
         MeasuresResponseDTO Update(MeasuresUpdateInputDTO measures, long id);
 

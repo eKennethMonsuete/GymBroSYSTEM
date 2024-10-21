@@ -50,7 +50,7 @@ namespace GymBroSERVICE.StudentService
                 
                
               
-                Measures = student.Measures?.Select(measure => new MeasuresResponseDTO
+                Measures = student.Measures?.Select(measure => new MeasuresResponseToStudentDTO
                 {                 
                     Weight = measure.Weight,
                     Hips = measure.Hips,
@@ -59,7 +59,8 @@ namespace GymBroSERVICE.StudentService
                     LeftQuadriceps = measure.LeftQuadriceps,
                     RightQuadriceps = measure.RightQuadriceps,
                     LeftCalf = measure.LeftCalf,
-                    RightCalf = measure.RightCalf
+                    RightCalf = measure.RightCalf,
+                    PreviousDate = measure.PreviousDate,
                 }).ToList()
             };
             
@@ -67,7 +68,8 @@ namespace GymBroSERVICE.StudentService
 
         public async Task<StudentFindAllResponseDTO> Create(StudentCreateDTO studentDto)
         {
-           var exists = await _UserRepository.FindAllAsync(e => e.Email.ToLower() == studentDto.Email.ToLower());
+           var exists = await _UserRepository.FindAllAsync
+                (e => e.Email.ToLower() == studentDto.Email.ToLower());
 
             if (exists.Any()) throw new Exception("Usário já cadastrado");
             

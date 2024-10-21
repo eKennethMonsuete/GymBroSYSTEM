@@ -31,15 +31,30 @@ namespace GymBroINFRA.Repository
 
         public T FindByID(long id)
         {
-            var entity = dbSet.Find(id);
-
-            // Verifica se a entidade foi encontrada
-            if (entity == null)
+            try
             {
-                throw new KeyNotFoundException($"Entity with ID {id} was not found.");
-            }
+                var entity = dbSet.Find(id);
 
-            return entity;
+                
+                if (entity == null)
+                {
+                    throw new KeyNotFoundException($"Entity with ID {id} was not found.");
+                }
+
+                return entity;
+            }
+            catch (KeyNotFoundException ex)
+            {
+                
+                Console.WriteLine($"Error: {ex.Message}");
+                throw; 
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                throw new Exception("An error occurred while fetching the entity.");
+            }
         }
 
         public T FindByEmail(string email)

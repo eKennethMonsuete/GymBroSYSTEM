@@ -43,12 +43,14 @@ namespace GymBroSERVICE.StudentService.DTO
             get; set;
         }
 
-        
-
        
 
 
-        public ICollection<MeasuresResponseDTO>? Measures
+
+
+
+
+        public ICollection<MeasuresResponseToStudentDTO>? Measures
         {
             get; set;
         }
