@@ -5,6 +5,7 @@ using GymBroSERVICE.MeasuresService;
 using GymBroSERVICE.PersonalService;
 using GymBroSERVICE.StudentService;
 using GymBroSERVICE.UserServices;
+using GymBroSERVICE.WorkoutService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,7 @@ internal class Program
         builder.Services.AddScoped<IPersonalService, PersonalService>();
         builder.Services.AddScoped<IStudentService, StudentService>();
         builder.Services.AddScoped<IUserService, UserServices>();
+        builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

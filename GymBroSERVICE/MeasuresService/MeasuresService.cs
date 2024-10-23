@@ -39,29 +39,46 @@ namespace GymBroSERVICE.MeasuresService
 
         public MeasuresResponseDTO FindByID(long id)
         {
-            var measure = _repository.FindByID(id);
-                        
-            if (measure == null)
+            try
             {
-                throw new KeyNotFoundException($"Medida com o ID {id} não foi encontrada.");
-            }
-                        
-            var responseDTO = new MeasuresResponseDTO
-            {
-                Id = measure.Id,
-                Weight = measure.Weight,
-                Hips = measure.Hips,
-                LeftBiceps = measure.LeftBiceps,
-                RightBiceps = measure.RightBiceps,
-                LeftQuadriceps = measure.LeftQuadriceps,
-                RightQuadriceps = measure.RightQuadriceps,
-                LeftCalf = measure.LeftCalf,
-                RightCalf = measure.RightCalf,
-                PreviousDate = measure.PreviousDate,
-                StudentId = measure.StudentId
-            };
+                var measure = _repository.FindByID(id);
 
-            return responseDTO;
+                // Verifica se a medida foi encontrada
+                if (measure == null)
+                {
+                    throw new KeyNotFoundException($"Medida com o ID {id} não foi encontrada.");
+                }
+
+                // Mapeia a entidade para o DTO
+                var responseDTO = new MeasuresResponseDTO
+                {
+                    Id = measure.Id,
+                    Weight = measure.Weight,
+                    Hips = measure.Hips,
+                    LeftBiceps = measure.LeftBiceps,
+                    RightBiceps = measure.RightBiceps,
+                    LeftQuadriceps = measure.LeftQuadriceps,
+                    RightQuadriceps = measure.RightQuadriceps,
+                    LeftCalf = measure.LeftCalf,
+                    RightCalf = measure.RightCalf,
+                    PreviousDate = measure.PreviousDate,
+                    StudentId = measure.StudentId
+                };
+
+                return responseDTO;
+            }
+            catch (KeyNotFoundException ex)
+            {
+                // Tratamento específico para o caso de medida não encontrada
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;  // Propaga a exceção para que a camada superior possa lidar com ela
+            }
+            catch (Exception ex)
+            {
+                // Tratamento para exceções genéricas
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                throw new Exception("Ocorreu um erro ao buscar a medida. Tente novamente mais tarde.");
+            }
         }
         public async Task<MeasuresResponseDTO> Create(MeasuresCreateInputDTO measures)
         {

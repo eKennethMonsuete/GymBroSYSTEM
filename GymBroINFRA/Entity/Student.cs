@@ -62,6 +62,10 @@ namespace GymBroINFRA.Entity;
     {
         get; set;
     }
+    public virtual ICollection<Workout> Workout
+    {
+        get; set;
+    }
 
     //public ICollection<Workout> Workouts{ get; set;}
 

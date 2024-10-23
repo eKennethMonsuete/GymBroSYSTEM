@@ -43,6 +43,10 @@ namespace GymBroINFRA.config
                WithOne(e => e.Student)
                .HasForeignKey(e => e.StudentId);
 
+            builder.HasMany(student => student.Workout)
+                .WithOne(workout => workout.Student)
+                .HasForeignKey(workout => workout.StudentId);
+
             builder.HasOne(p => p.User).WithOne().HasForeignKey<Student>(p => p.UserId);
 
         }

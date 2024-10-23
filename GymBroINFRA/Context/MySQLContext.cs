@@ -20,12 +20,18 @@ namespace GymBroINFRA.Context
         public DbSet<Personal> Personal
         {
             get; set;
-        } public DbSet<User> Users
+        } 
+        public DbSet<User> Users
         {
             get; set;
         }
 
-       
+        public DbSet<Workout> Workouts
+        {
+            get; set;
+        }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +40,7 @@ namespace GymBroINFRA.Context
             modelBuilder.ApplyConfiguration(new PersonalConfiguration());
             modelBuilder.ApplyConfiguration(new MeasuresConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkoutConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
