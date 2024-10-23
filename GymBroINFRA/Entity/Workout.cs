@@ -10,10 +10,13 @@ namespace GymBroINFRA.Entity
     {
         public int Id { get; set; }
         public string WorkoutName { get; set; }
-        public string Workout1 { get; set; }
-        public string Workout2 { get; set; }
-        public string Workout3 { get; set; }
-        public string Workout4 { get; set; }
+
+        public string Exercise { get; set; }
+        public string Description
+        {
+            get; set;
+        }
+
         public string Note
         {
             get; set;

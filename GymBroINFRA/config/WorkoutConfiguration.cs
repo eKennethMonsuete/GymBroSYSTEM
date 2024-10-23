@@ -15,11 +15,16 @@ namespace GymBroINFRA.config
         {
             builder.ToTable(nameof(Workout));
             builder.HasKey(x => x.Id);
+
             builder.Property(x =>   x.WorkoutName).IsRequired();
-            builder.Property(x => x.Workout1).IsRequired();
-            builder.Property(x => x.Workout2);
-            builder.Property(x => x.Workout3);
-            builder.Property(x => x.Workout4);
+
+            builder.Property(x => x.Exercise)
+                .IsRequired()
+                .HasColumnType("TEXT"); 
+
+
+            builder.Property(x => x.Description);
+            
             builder.Property(x => x.Note);
 
             builder.Property(e => e.CreatedAt)

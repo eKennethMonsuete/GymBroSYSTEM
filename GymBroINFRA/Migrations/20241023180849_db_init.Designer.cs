@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymBroINFRA.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20241021203614_PreviousDate_added_to_measures")]
-    partial class PreviousDate_added_to_measures
+    [Migration("20241023180849_db_init")]
+    partial class db_init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 21, 17, 36, 13, 581, DateTimeKind.Local).AddTicks(7906));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 15, 8, 49, 13, DateTimeKind.Local).AddTicks(8746));
 
                     b.Property<double>("Hips")
                         .HasColumnType("double");
@@ -90,7 +90,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 21, 17, 36, 13, 579, DateTimeKind.Local).AddTicks(4210));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 15, 8, 49, 12, DateTimeKind.Local).AddTicks(8470));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -130,7 +130,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 21, 17, 36, 13, 576, DateTimeKind.Local).AddTicks(7422));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 15, 8, 49, 11, DateTimeKind.Local).AddTicks(6491));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -200,6 +200,53 @@ namespace GymBroINFRA.Migrations
                     b.ToTable("User", (string)null);
                 });
 
+            modelBuilder.Entity("GymBroINFRA.Entity.Workout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 15, 8, 49, 14, DateTimeKind.Local).AddTicks(5936));
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("StudentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Workout1")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Workout2")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Workout3")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Workout4")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("WorkoutName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Workout", (string)null);
+                });
+
             modelBuilder.Entity("GymBroINFRA.Entity.Measures", b =>
                 {
                     b.HasOne("GymBroINFRA.Entity.Student", "Student")
@@ -255,6 +302,17 @@ namespace GymBroINFRA.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("GymBroINFRA.Entity.Workout", b =>
+                {
+                    b.HasOne("GymBroINFRA.Entity.Student", "Student")
+                        .WithMany("Workout")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("GymBroINFRA.Entity.Personal", b =>
                 {
                     b.Navigation("Students");
@@ -263,6 +321,8 @@ namespace GymBroINFRA.Migrations
             modelBuilder.Entity("GymBroINFRA.Entity.Student", b =>
                 {
                     b.Navigation("Measures");
+
+                    b.Navigation("Workout");
                 });
 #pragma warning restore 612, 618
         }

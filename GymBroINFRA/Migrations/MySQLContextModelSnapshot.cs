@@ -36,7 +36,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 22, 23, 12, 18, 855, DateTimeKind.Local).AddTicks(869));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 16, 42, 14, 348, DateTimeKind.Local).AddTicks(3020));
 
                     b.Property<double>("Hips")
                         .HasColumnType("double");
@@ -87,7 +87,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 22, 23, 12, 18, 853, DateTimeKind.Local).AddTicks(2365));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 16, 42, 14, 347, DateTimeKind.Local).AddTicks(2036));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -127,7 +127,7 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 22, 23, 12, 18, 851, DateTimeKind.Local).AddTicks(2002));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 16, 42, 14, 345, DateTimeKind.Local).AddTicks(9096));
 
                     b.Property<bool>("IsActived")
                         .HasColumnType("tinyint(1)");
@@ -208,7 +208,15 @@ namespace GymBroINFRA.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 10, 22, 23, 12, 18, 856, DateTimeKind.Local).AddTicks(3460));
+                        .HasDefaultValue(new DateTime(2024, 10, 23, 16, 42, 14, 349, DateTimeKind.Local).AddTicks(8088));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Exercise")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Note")
                         .IsRequired()
@@ -216,22 +224,6 @@ namespace GymBroINFRA.Migrations
 
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Workout1")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Workout2")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Workout3")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Workout4")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("WorkoutName")
                         .IsRequired()

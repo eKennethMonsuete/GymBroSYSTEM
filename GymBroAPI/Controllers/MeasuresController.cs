@@ -20,6 +20,8 @@ namespace GymBroAPI.Controllers
         {
             return Ok( await _service.FindAll());
         }
+
+
         [HttpGet("{id}")]
         public IActionResult GetOneMeasuresByID(long id)
         {

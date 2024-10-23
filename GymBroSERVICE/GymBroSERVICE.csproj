@@ -15,9 +15,4 @@
     <ProjectReference Include="..\GymBroINFRA\GymBroINFRA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="WorkoutService\DTO\Response\" />
-    <Folder Include="WorkoutService\DTO\Request\" />
-  </ItemGroup>
-
 </Project>
