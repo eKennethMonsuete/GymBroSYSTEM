@@ -48,12 +48,14 @@ namespace GymBroSERVICE.PersonalService
                 LastName = personal.LastName,
                 Phone = personal.Phone,
                 CreatedAt = personal.CreatedAt.ToString("dd/MM/yyyy"),
-                Students = personal.Students?.Select(student => new StudentFindAllResponseDTO
+                Students = personal.Students?.Select(student => new StudentResponseToPersonalFindById
                 {
                     Id = student.Id,
                     Name = student.Name,
+                    Email = student.User.Email,
                     LastName = student.LastName,
                     Phone = student.Phone,
+                    CreatedAt = student.CreatedAt.ToString("dd/MM/yyyy")
                 }).ToList()
             };
 
@@ -122,7 +124,9 @@ namespace GymBroSERVICE.PersonalService
                 Name = result.Name,
                 Email = personal.User.Email,
                 LastName = result.LastName,
-                Phone = result.Phone
+                Phone = result.Phone,
+                CreatedAt = personal.CreatedAt.ToString("dd/MM/yyyy")
+
 
             };
         }

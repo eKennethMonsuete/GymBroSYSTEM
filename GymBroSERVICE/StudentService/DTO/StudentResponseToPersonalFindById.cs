@@ -1,14 +1,12 @@
-﻿using GymBroINFRA.Enums;
-using GymBroSERVICE.StudentService.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBroSERVICE.PersonalService.DTO
+namespace GymBroSERVICE.StudentService.DTO
 {
-    public class PersonalFindByIdResponse
+    public class StudentResponseToPersonalFindById
     {
         public long Id
         {
@@ -26,25 +24,14 @@ namespace GymBroSERVICE.PersonalService.DTO
         {
             get; set;
         }
-
         public string Phone
         {
             get; set;
         }
+
         public string CreatedAt
         {
             get; set;
         }
-
-        public ICollection<StudentResponseToPersonalFindById>? Students
-        {
-            get; set;
-        }
-
-
-
-
     }
-
-
 }
