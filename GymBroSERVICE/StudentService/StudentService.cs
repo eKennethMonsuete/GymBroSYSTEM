@@ -4,6 +4,7 @@ using GymBroSERVICE.MeasuresService.DTO;
 using GymBroSERVICE.PersonalService.DTO;
 using GymBroSERVICE.StudentlService.DTO;
 using GymBroSERVICE.StudentService.DTO;
+using GymBroSERVICE.WorkoutService.DTO.Response;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -61,6 +62,16 @@ namespace GymBroSERVICE.StudentService
                     LeftCalf = measure.LeftCalf,
                     RightCalf = measure.RightCalf,
                     PreviousDate = measure.PreviousDate,
+                }).ToList(),
+
+                Workouts  = student.Workout?.Select(workout => new WorkoutResponseToStudentFindById
+                {
+                    WorkoutName = workout.WorkoutName,
+                    Exercise  = workout.Exercise,
+                    Description = workout.Description,
+                    Note = workout.Note,
+                    CreatedAt = workout.CreatedAt.ToString("dd/MM/yyyy")
+
                 }).ToList()
             };
             
@@ -121,7 +132,7 @@ namespace GymBroSERVICE.StudentService
             };
         }
 
-        public StudentFindByIdResponseDTO Update(long id, StudentUpdateDTO studentDto)
+        public StudentUpdateResponse Update(long id, StudentUpdateDTO studentDto)
         {
 
             var student = _repository.Where(e => e.Id == id).Include(e => e.User).FirstOrDefault();
@@ -141,13 +152,15 @@ namespace GymBroSERVICE.StudentService
           var result =  _repository.Update(student);
           var userResult = _UserRepository.Update(student.User);
 
-            return new StudentFindByIdResponseDTO
+            return new StudentUpdateResponse
             {
-                Id = result.Id,
+                
                 Name = result.Name,
                 LastName = result.LastName,
                 Phone = result.Phone,
-                Email = student.User.Email
+                Email = student.User.Email,
+                PesonalId = result.PersonalId,
+                CreatedAt = result.CreatedAt.ToString("dd/MM/yyyy")
             };
         }
 

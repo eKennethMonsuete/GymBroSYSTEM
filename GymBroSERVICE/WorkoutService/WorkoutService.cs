@@ -29,6 +29,7 @@ namespace GymBroSERVICE.WorkoutService
                 Exercise = x.Exercise,
                 Description = x.Description,
                 Note = x.Note,
+                StudentId = x.StudentId,
                 CreatedAt = x.CreatedAt.ToString("dd/MM/yyyy"),
             }).ToList();
             return  workoutDTO;
@@ -91,6 +92,7 @@ namespace GymBroSERVICE.WorkoutService
             var updatedWorkoutDTO = new WorkoutFindAllResponse
             {
                 Id = updatedWorkout.Id,
+                CreatedAt = existingWorkout.CreatedAt.ToString("dd/MM/yyyy"),
                 WorkoutName = updatedWorkout.WorkoutName,
                 Exercise = updatedWorkout.Exercise,
                 Description = updatedWorkout.Description,

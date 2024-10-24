@@ -1,8 +1,4 @@
-﻿using GymBroINFRA.Enums;
-using GymBroSERVICE.MeasuresService.DTO;
-using GymBroSERVICE.PersonalService.DTO;
-using GymBroSERVICE.WorkoutService.DTO.Response;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.StudentService.DTO
 {
-    public class StudentFindByIdResponseDTO
+    public class StudentUpdateResponse
     {
-        public long Id
-        {
-            get; set;
-        }
         public string Name
         {
             get; set;
@@ -43,16 +35,5 @@ namespace GymBroSERVICE.StudentService.DTO
         {
             get; set;
         }
-
-        public ICollection<MeasuresResponseToStudentDTO>? Measures
-        {
-            get; set;
-        }
-
-        public ICollection<WorkoutResponseToStudentFindById>? Workouts{get; set;}
-        
-
-
-
     }
 }

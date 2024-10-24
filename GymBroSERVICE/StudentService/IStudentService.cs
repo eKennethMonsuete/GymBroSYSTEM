@@ -13,7 +13,7 @@ namespace GymBroSERVICE.StudentService
         Task<List<StudentFindAllResponseDTO>> FindAll();
         StudentFindByIdResponseDTO FindById(long id);
         Task<StudentFindAllResponseDTO> Create(StudentCreateDTO studentDto);
-        StudentFindByIdResponseDTO Update(long id, StudentUpdateDTO studentDto);
+        StudentUpdateResponse Update(long id, StudentUpdateDTO studentDto);
         void Delete(long id);
     }
 }
