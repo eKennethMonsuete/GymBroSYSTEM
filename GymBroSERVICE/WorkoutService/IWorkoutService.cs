@@ -13,7 +13,8 @@ namespace GymBroSERVICE.WorkoutService
     {
 
         Task<List<WorkoutFindAllResponse>> FindAll();
-        WorkoutFindAllResponse FindById(long id);
+
+        WorkoutFindByIdResponse FindById(long id);
 
         Task<WorkoutFindAllResponse> Create(WorkoutCreateRequest workout);
 

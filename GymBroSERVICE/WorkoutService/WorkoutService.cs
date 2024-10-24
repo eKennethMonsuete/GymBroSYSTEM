@@ -103,44 +103,28 @@ namespace GymBroSERVICE.WorkoutService
 
         }
 
-        public WorkoutFindAllResponse FindById(long id)
+        public WorkoutFindByIdResponse FindById(long id)
         {
-            try
+            var workout = _repository.FindByID(id);
+
+            // Verifica se o treino foi encontrado
+            if (workout == null)
             {
-                var workout = _repository.FindByID(id);
-
-                // Verifica se a medida foi encontrada
-                if (workout == null)
-                {
-                    throw new KeyNotFoundException($"Treino com o ID {id} não foi encontrada.");
-                }
-
-                // Mapeia a entidade para o DTO
-                var responseDTO = new WorkoutFindAllResponse
-                {
-                    Id= workout.Id,
-                    WorkoutName= workout.WorkoutName,
-                    Exercise = workout.Exercise,
-                    Description = workout.Description,
-
-                    StudentId = workout.StudentId,
-                    Note = workout.Note
-                };
-
-                return responseDTO;
+                throw new KeyNotFoundException($"Treino com o ID {id} não foi encontrado.");
             }
-            catch (KeyNotFoundException ex)
+
+            // Mapeia a entidade para o DTO
+            var responseDTO = new WorkoutFindByIdResponse
             {
-                // Tratamento específico para o caso de medida não encontrada
-                Console.WriteLine($"Error: {ex.Message}");
-                throw;  // Propaga a exceção para que a camada superior possa lidar com ela
-            }
-            catch (Exception ex)
-            {
-                // Tratamento para exceções genéricas
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-                throw new Exception("Ocorreu um erro ao buscar a medida. Tente novamente mais tarde.");
-            }
+                WorkoutName = workout.WorkoutName,
+                Exercise = workout.Exercise,
+                Description = workout.Description,
+                CreatedAt = workout.CreatedAt.ToString("dd/MM/yyyy"),
+                Note = workout.Note,
+                StudentId = workout.StudentId,
+            };
+
+            return responseDTO;
         }
     }
 }

@@ -40,25 +40,12 @@ namespace GymBroAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOneWorkoutByID(long id)
         {
-            try
-            {
-                var workout = _service.FindById(id);
+            var workout = _service.FindById(id);
 
-                if (workout == null) return NotFound("Medida não encontrado.");
+            if (workout == null)
+                return NotFound($"Treino com o ID {id} não foi encontrado.");
 
-                return Ok(workout);
-
-            }
-            catch (KeyNotFoundException ex)
-            {
-                // Retorna 404 Not Found com a mensagem de erro
-                return NotFound(new { message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                // Em caso de erro inesperado, retorna 500 Internal Server Error
-                return StatusCode(500, new { message = "Ocorreu um erro no servidor. Tente novamente mais tarde." });
-            }
+            return Ok(workout);
 
         }
     }

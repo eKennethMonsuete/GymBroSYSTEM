@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.WorkoutService.DTO.Response
 {
-    public class WorkoutFindAllResponse
+    public class WorkoutFindByIdResponse
     {
-        public long Id
-        {
-            get; set;
-        }
         public string WorkoutName
         {
             get; set;
@@ -24,7 +20,7 @@ namespace GymBroSERVICE.WorkoutService.DTO.Response
         {
             get; set;
         }
-        
+
         public string Note
         {
             get; set;
@@ -37,6 +33,5 @@ namespace GymBroSERVICE.WorkoutService.DTO.Response
         {
             get; set;
         }
-
     }
 }
