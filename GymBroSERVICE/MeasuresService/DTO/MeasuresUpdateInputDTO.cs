@@ -46,6 +46,10 @@ namespace GymBroSERVICE.MeasuresService.DTO
         {
             get; set;
         }
+        public string PreviousDate
+        {
+            get; set;
+        }
 
         public long StudentId
         {

@@ -30,6 +30,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = measure.RightQuadriceps,
                 LeftCalf = measure.LeftCalf,
                 RightCalf = measure.RightCalf,
+                CreatedAt = measure.CreatedAt.ToString("dd/MM/yyyy"),
                 PreviousDate = measure.PreviousDate,
                 StudentId = measure.StudentId,
             }).ToList();
@@ -53,6 +54,7 @@ namespace GymBroSERVICE.MeasuresService
                 var responseDTO = new MeasuresResponseDTO
                 {
                     Id = measure.Id,
+                    CreatedAt = measure.CreatedAt.ToString("dd/MM/yyyy"),
                     Weight = measure.Weight,
                     Hips = measure.Hips,
                     LeftBiceps = measure.LeftBiceps,
@@ -126,6 +128,7 @@ namespace GymBroSERVICE.MeasuresService
                                 
             return new MeasuresResponseDTO
             {   Id = measure.Id,
+                CreatedAt = measure.CreatedAt.ToString("dd/MM/yyyy"),
                 Hips = measure.Hips,
                 LeftBiceps = measure.LeftBiceps,
                 RightBiceps = measure.RightBiceps,
@@ -183,6 +186,7 @@ namespace GymBroSERVICE.MeasuresService
             existingMeasures.RightQuadriceps = measuresInputUpdateDTO.RightQuadriceps;
             existingMeasures.LeftCalf = measuresInputUpdateDTO.LeftCalf;
             existingMeasures.RightCalf = measuresInputUpdateDTO.RightCalf;
+            existingMeasures.PreviousDate = measuresInputUpdateDTO.PreviousDate;
             existingMeasures.StudentId = measuresInputUpdateDTO.StudentId;
 
             
@@ -198,6 +202,7 @@ namespace GymBroSERVICE.MeasuresService
             {
         
                 Id = existingMeasures.Id,
+                CreatedAt  =  existingMeasures.CreatedAt.ToString("dd/MM/yyyy"),
                 Weight = updatedMeasures.Weight,
                 Hips = updatedMeasures.Hips,
                 LeftBiceps = updatedMeasures.LeftBiceps,
@@ -206,6 +211,7 @@ namespace GymBroSERVICE.MeasuresService
                 RightQuadriceps = updatedMeasures.RightQuadriceps,
                 LeftCalf = updatedMeasures.LeftCalf,
                 RightCalf = updatedMeasures.RightCalf,
+                PreviousDate = updatedMeasures.PreviousDate,
                 StudentId = updatedMeasures.StudentId
             };
 

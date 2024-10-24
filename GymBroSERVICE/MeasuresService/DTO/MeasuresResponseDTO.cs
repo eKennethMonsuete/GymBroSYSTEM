@@ -8,6 +8,8 @@
             get; set;
         }
 
+        public string CreatedAt { get; set; }
+
         public double Weight
         {
             get; set;
