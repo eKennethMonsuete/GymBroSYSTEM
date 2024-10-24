@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace GymBroSERVICE.WorkoutService.DTO.Request
 {
-    public class WorkoutCreateRequest
+    public class WorkoutUpdateRequest
     {
-       
         public string WorkoutName
         {
             get; set;
@@ -17,9 +16,9 @@ namespace GymBroSERVICE.WorkoutService.DTO.Request
         {
             get; set;
         }
-        
 
-            public string Description
+
+        public string Description
         {
             get; set;
         }
@@ -28,7 +27,7 @@ namespace GymBroSERVICE.WorkoutService.DTO.Request
         {
             get; set;
         }
-        
+
         public long StudentId
         {
             get; set;
