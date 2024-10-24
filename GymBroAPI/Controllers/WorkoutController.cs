@@ -25,6 +25,19 @@ namespace GymBroAPI.Controllers
         {
             return Ok(await _service.FindAll());
         }
+        [HttpGet("{id}")]
+        public IActionResult GetOneWorkoutByID(long id)
+        {
+            var workout = _service.FindById(id);
+
+            if (workout == null)
+                return NotFound($"Treino com o ID {id} não foi encontrado.");
+
+            return Ok(workout);
+
+        }
+
+        
 
         [HttpPost]
         public async Task<IActionResult> SaveWorkout([FromBody] WorkoutCreateRequest input) => Ok(await _service.Create(input));
@@ -37,16 +50,14 @@ namespace GymBroAPI.Controllers
             return Ok(updatedWorkout);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetOneWorkoutByID(long id)
+       
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteWorkout(long id)
         {
-            var workout = _service.FindById(id);
+            _service.Delete(id);
 
-            if (workout == null)
-                return NotFound($"Treino com o ID {id} não foi encontrado.");
-
-            return Ok(workout);
-
+            return NoContent();
         }
     }
 }

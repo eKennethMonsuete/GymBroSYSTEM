@@ -20,7 +20,7 @@ namespace GymBroSERVICE.WorkoutService
 
         WorkoutFindAllResponse Update(WorkoutUpdateRequest workoutUpdate, long id);
 
-        //void Delete(long id);
+        void Delete(long id);
 
         
 

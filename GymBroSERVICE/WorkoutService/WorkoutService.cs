@@ -126,5 +126,21 @@ namespace GymBroSERVICE.WorkoutService
 
             return responseDTO;
         }
+
+        public void Delete(long id)
+        {
+            try
+            {
+                _repository.Delete(id);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                throw new InvalidOperationException("A entidade com o ID fornecido não foi encontrada.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Falha ao tentar deletar a entidade.", ex);
+            }
+        }
     }
 }
