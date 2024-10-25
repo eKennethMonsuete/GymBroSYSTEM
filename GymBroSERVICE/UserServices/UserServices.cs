@@ -22,12 +22,9 @@ namespace GymBroSERVICE.UserServices
             _configuration = tokenConfiguration;
         }
 
-        public LoginResultDTO Login(LoginDTO authDTO)
+        public async  Task<LoginResultDTO> Login(LoginDTO authDTO)
         {
-            var user = _repository.FindByEmail(authDTO.Email.ToLower());
-
-            if (user == null)
-                throw new Exception("Credenciais inválidas");
+            var user = await _repository.FindByEmail(authDTO.Email.ToLower()) ?? throw new Exception("Credenciais inválidas");
 
             bool match = BCrypt.Net.BCrypt.EnhancedVerify(authDTO.Password, user.Password);
 

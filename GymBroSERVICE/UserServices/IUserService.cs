@@ -5,6 +5,6 @@ namespace GymBroSERVICE.UserServices
     public interface IUserService
     {
 
-        LoginResultDTO Login(LoginDTO authDTO);
+        Task<LoginResultDTO> Login(LoginDTO authDTO);
     }
 }

@@ -57,11 +57,9 @@ namespace GymBroINFRA.Repository
             }
         }
 
-        public T FindByEmail(string email)
+        public async Task<T> FindByEmail(string email)
         {
-            var entity = dbSet.FirstOrDefault(e => EF.Property<string>(e, "Email") == email);
-
-            return entity;
+            return  await dbSet.FirstOrDefaultAsync(e => EF.Property<string>(e, "Email") == email);
         }
 
 

@@ -8,19 +8,22 @@ namespace GymBroAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-
         private readonly IUserService _service;
 
-        public UserController(IUserService service)
-        {
-            _service = service;
-        }
+        public UserController(IUserService service) => _service = service;
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDTO authDTO)
+        [ProducesResponseType(typeof(LoginResultDTO), StatusCodes.Status200OK)]
+        public async ValueTask<IActionResult> Login([FromBody] LoginDTO authDTO)
         {
-
-            return Ok(_service.Login(authDTO));
+            try
+            {
+                return Ok(await _service.Login(authDTO));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
