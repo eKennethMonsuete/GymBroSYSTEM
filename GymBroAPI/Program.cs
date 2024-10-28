@@ -79,6 +79,14 @@ internal class Program
 
         var app = builder.Build();
 
+        app.UseCors(c =>
+        {
+            c.AllowAnyOrigin();
+            c.AllowAnyHeader();
+            c.AllowAnyMethod();
+
+        });
+
         app.UseSwagger();
         app.UseSwaggerUI();
 
