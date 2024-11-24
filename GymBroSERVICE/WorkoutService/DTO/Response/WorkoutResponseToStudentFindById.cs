@@ -8,6 +8,10 @@ namespace GymBroSERVICE.WorkoutService.DTO.Response
 {
     public class WorkoutResponseToStudentFindById
     {
+        public long id
+        {
+            get; set;
+        }
 
         public string WorkoutName
         {

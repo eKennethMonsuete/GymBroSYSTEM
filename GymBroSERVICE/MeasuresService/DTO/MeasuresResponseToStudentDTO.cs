@@ -9,6 +9,11 @@ namespace GymBroSERVICE.MeasuresService.DTO
    public class MeasuresResponseToStudentDTO
     {
 
+        public long id
+        {
+            get; set;
+        }
+
 
         public double Weight
         {
@@ -45,6 +50,10 @@ namespace GymBroSERVICE.MeasuresService.DTO
             get; set;
         }
         public double LeftCalf
+        {
+            get; set;
+        }
+        public string CreatedAt
         {
             get; set;
         }

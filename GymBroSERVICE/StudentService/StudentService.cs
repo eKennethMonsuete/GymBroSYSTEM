@@ -52,7 +52,8 @@ namespace GymBroSERVICE.StudentService
                
               
                 Measures = student.Measures?.Select(measure => new MeasuresResponseToStudentDTO
-                {                 
+                {     
+                    id = measure.Id,
                     Weight = measure.Weight,
                     Hips = measure.Hips,
                     LeftBiceps = measure.LeftBiceps,
@@ -61,11 +62,13 @@ namespace GymBroSERVICE.StudentService
                     RightQuadriceps = measure.RightQuadriceps,
                     LeftCalf = measure.LeftCalf,
                     RightCalf = measure.RightCalf,
+                    CreatedAt = measure.CreatedAt.ToString("dd/MM/yyyy"),
                     PreviousDate = measure.PreviousDate,
                 }).ToList(),
 
                 Workouts  = student.Workout?.Select(workout => new WorkoutResponseToStudentFindById
                 {
+                    id = workout.Id,
                     WorkoutName = workout.WorkoutName,
                     Exercise  = workout.Exercise,
                     Description = workout.Description,

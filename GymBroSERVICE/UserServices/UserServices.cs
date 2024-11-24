@@ -14,11 +14,15 @@ namespace GymBroSERVICE.UserServices
     {
 
         private readonly IRepository<User> _repository;
+        private readonly IRepository<Personal> _repositoryPersonal;
+        private readonly IRepository<Student> _repositoryStudent;
         private readonly TokenConfiguration _configuration;
 
-        public UserServices(IRepository<User> repository, TokenConfiguration tokenConfiguration)
+        public UserServices(IRepository<User> repository, IRepository<Student> repositoryStudent, IRepository<Personal> repositoryPersonal, TokenConfiguration tokenConfiguration)
         {
             _repository = repository;
+            _repositoryPersonal = repositoryPersonal;
+            _repositoryStudent = repositoryStudent;
             _configuration = tokenConfiguration;
         }
 
@@ -34,11 +38,15 @@ namespace GymBroSERVICE.UserServices
             //GERAR O TOKEN
             string token = GenerateToken(user);
 
+            var studentId = _repositoryStudent.FindByID;
+
 
             return new LoginResultDTO
             {
                 AccessToken = token,
                 ExpiratedAt = DateTime.Now.AddMinutes(_configuration.Minutes)
+                
+                
             };
         }
 
@@ -56,11 +64,13 @@ namespace GymBroSERVICE.UserServices
 
                 claims.Add(new Claim(ClaimTypes.Sid, user.StudentId.ToString()));
                 claims.Add(new Claim(ClaimTypes.Role, "STUDENT"));
+                claims.Add(new Claim(ClaimTypes.Name, user.Student.Name.ToString()));
             }
             else
             {
                 claims.Add(new Claim(ClaimTypes.Sid, user.PersonalId.ToString()));
                 claims.Add(new Claim(ClaimTypes.Role, "PERSONAL"));
+                claims.Add(new Claim(ClaimTypes.Name, user.Personal.Name.ToString()));
             }
 
             return GetToken(claims);
